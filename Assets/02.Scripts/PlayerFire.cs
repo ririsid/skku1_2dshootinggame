@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum FireMode
+{
+    Auto,
+    Mannual
+}
+
 public class PlayerFire : MonoBehaviour
 {
     // 목표: 총알을 만들어서 발사하고 싶다.
@@ -7,23 +13,61 @@ public class PlayerFire : MonoBehaviour
     // 필요 속성:
     // - 총알 프리팹
     public GameObject BulletPrefab;
-    // - 총구
-    public GameObject Muzzle;
+    public GameObject SubBulletPrefab;
+    
+    // - 총구들
+    public GameObject[] Muzzles;
+    public GameObject[] SubMuzzles;
+
+    // - 쿨타임 / 쿨타이머
+    public float Cooltime  = 0.6f;
+    public float Cooltimer = 0f;
+
+    // - 모드(자동, 수동)
+    public FireMode FireMode = FireMode.Mannual;
+
 
     
     // 필요 기능:
     // - 발사하다.
     private void Update()
     {
-        // 1. 발사 버튼을 누르면
-        if(Input.GetButtonDown("Fire1"))
-        {
-            // 2. 프리팹으로부터 총알을 만든다.
-            GameObject bullet = Instantiate(BulletPrefab); // 인스턴스화
-            // Instantiate는 게임오브젝트를 '복제'해서 씬에 새로 만들어 넣는다.
+        Cooltimer -= Time.deltaTime;
 
-            // 3. 총알 위치를 총구의 위치로 지정해준다.
-            bullet.transform.position = Muzzle.transform.position;
+        // 키 입력 검사
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            FireMode = FireMode.Auto;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            FireMode = FireMode.Mannual;
+        }
+
+        // 쿨타임이 아직 안됐으면 종료
+        if(Cooltimer > 0 )
+        {
+            return;
+        }
+
+        // 자동 모드 이거나 "Fire1" 버튼이 입력되면..
+        if (FireMode == FireMode.Auto || Input.GetButtonDown("Fire1"))
+        {
+            foreach (GameObject muzzle in Muzzles)
+            {
+                GameObject bullet = Instantiate(BulletPrefab); // 인스턴스화
+
+                bullet.transform.position = muzzle.transform.position;
+            }
+
+            foreach (GameObject subMuzzle in SubMuzzles)
+            {
+                GameObject subBullet = Instantiate(SubBulletPrefab); // 인스턴스화
+
+                subBullet.transform.position = subMuzzle.transform.position;
+            }
+
+            Cooltimer = Cooltime;
         }
     }
 
