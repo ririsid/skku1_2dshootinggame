@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // MonoBehaviour: ¿©·¯ °¡Áö ÀÌº¥Æ® ÇÔ¼ö¸¦ ÀÚµ¿À¸·Î È£ÃâÇØÁÖ´Â ±â´É
-    // Component: °ÔÀÓ ¿ÀºêÁ§Æ®¿¡ Ãß°¡ÇÒ ¼ö ÀÖ´Â ¿©·¯ °¡Áö ±â´É
+    // MonoBehaviour: ì—¬ëŸ¬ ê°€ì§€ ì´ë²¤íŠ¸ í•¨ìˆ˜ë¥¼ ìë™ìœ¼ë¡œ í˜¸ì¶œí•´ì£¼ëŠ” ê¸°ëŠ¥
+    // Component: ê²Œì„ ì˜¤ë¸Œì íŠ¸ì— ì¶”ê°€í•  ìˆ˜ ìˆëŠ” ì—¬ëŸ¬ ê°€ì§€ ê¸°ëŠ¥
 
-    // ÃÖÁ¾ ¸ñÇ¥: Å°º¸µå ÀÔ·Â¿¡ µû¶ó ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿½ÃÅ°°í ½Í´Ù.
+    // ìµœì¢… ëª©í‘œ: í‚¤ë³´ë“œ ì…ë ¥ì— ë”°ë¼ í”Œë ˆì´ì–´ë¥¼ ì´ë™ì‹œí‚¤ê³  ì‹¶ë‹¤.
 
     public float Speed = 3f;
 
@@ -17,31 +17,31 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
 
-        // °ÔÀÓ ¿ÀºêÁ§Æ®¿¡ transformÀÌ¶ó´Â ÄÄÆ÷³ÍÆ®´Â ¹«Á¶°Ç ÀÖÀ¸¹Ç·Î
-        // transform¿¡ ½±°Ô Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ¸¸µé¾î³ù´Ù.
+        // ê²Œì„ ì˜¤ë¸Œì íŠ¸ì— transformì´ë¼ëŠ” ì»´í¬ë„ŒíŠ¸ëŠ” ë¬´ì¡°ê±´ ìˆìœ¼ë¯€ë¡œ
+        // transformì— ì‰½ê²Œ ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ ë§Œë“¤ì–´ë†¨ë‹¤.
 
-        // transform.Translate -> ÀÌµ¿ÇÏ´Ù¶ó´Â ¶æÀ¸·Î ¸Å°³ º¯¼ö·Î '¼Óµµ'À» ¹Ş´Â´Ù.
-        // ¼Óµµ: ¹æÇâ * ¼Ó·Â
-
-
-
-        // º¤ÅÍ   : Å©±â¿Í ¹æÇâ 
-        // ¿ŞÂÊÀ¸·Î 100
+        // transform.Translate -> ì´ë™í•˜ë‹¤ë¼ëŠ” ëœ»ìœ¼ë¡œ ë§¤ê°œ ë³€ìˆ˜ë¡œ 'ì†ë„'ì„ ë°›ëŠ”ë‹¤.
+        // ì†ë„: ë°©í–¥ * ì†ë ¥
 
 
-        // ÃÊ´ç 3M(unit)¸¸Å­ À§·Î ¿òÁ÷¿©¶ó!
+
+        // ë²¡í„°   : í¬ê¸°ì™€ ë°©í–¥ 
+        // ì™¼ìª½ìœ¼ë¡œ 100
+
+
+        // ì´ˆë‹¹ 3M(unit)ë§Œí¼ ìœ„ë¡œ ì›€ì§ì—¬ë¼!
         // transform.Translate(Vector2.up * 3f * Time.deltaTime);
         // Vector2 d = Vector2.up;
-        // Time.deltaTime: ÇÁ·¹ÀÓ °£ ½Ã°£ °£°İÀ» ÀÇ¹ÌÇÑ´Ù.
-        // 4ÇÁ·¹ÀÓÀº Time.deltaTime: 1/4 = 0.25ÃÊ     
+        // Time.deltaTime: í”„ë ˆì„ ê°„ ì‹œê°„ ê°„ê²©ì„ ì˜ë¯¸í•œë‹¤.
+        // 4í”„ë ˆì„ì€ Time.deltaTime: 1/4 = 0.25ì´ˆ     
         // 3*0.25 + 3 * 0.25 + 3 * 0.25 + 3 * 0.25 = 3
 
 
-        // 2ÇÁ·¹ÀÓÀº Time.deltaTime: 1/2 = 0.5ÃÊ
+        // 2í”„ë ˆì„ì€ Time.deltaTime: 1/2 = 0.5ì´ˆ
         // 3*0.5 + 3*0.5 = 3
 
-        // 30ÇÁ·¹ÀÓÀº Time.deltaTime: 1/30 = 0.03ÃÊ
-        // 60ÇÁ·¹ÀÓÀº Time.deltaTime: 1/60 = 0.016ÃÊ
+        // 30í”„ë ˆì„ì€ Time.deltaTime: 1/30 = 0.03ì´ˆ
+        // 60í”„ë ˆì„ì€ Time.deltaTime: 1/60 = 0.016ì´ˆ
 
 
         SpeedCheck();
@@ -52,30 +52,30 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        // Å°º¸µå, ¸¶¿ì½º, ÅÍÄ¡, Á¶ÀÌ½ºÆ½ µî ¿ÜºÎ¿¡¼­ µé¾î¿À´Â
-        // ÀÔ·Â ¼Ò½º´Â ¸ğ¿À¿ÀµÎ 'Input' Å¬·¡½º¸¦ ÅëÇØ °ü¸®ÇÒ ¼ö ÀÖ´Ù.
-        //float h = Input.GetAxis("Horizontal"); // ¼öÆò Å° : -1f ~ 1f
-        float h = Input.GetAxisRaw("Horizontal"); // ¼öÆò Å° : -1, 0, 1
+        // í‚¤ë³´ë“œ, ë§ˆìš°ìŠ¤, í„°ì¹˜, ì¡°ì´ìŠ¤í‹± ë“± ì™¸ë¶€ì—ì„œ ë“¤ì–´ì˜¤ëŠ”
+        // ì…ë ¥ ì†ŒìŠ¤ëŠ” ëª¨ì˜¤ì˜¤ë‘ 'Input' í´ë˜ìŠ¤ë¥¼ í†µí•´ ê´€ë¦¬í•  ìˆ˜ ìˆë‹¤.
+        //float h = Input.GetAxis("Horizontal"); // ìˆ˜í‰ í‚¤ : -1f ~ 1f
+        float h = Input.GetAxisRaw("Horizontal"); // ìˆ˜í‰ í‚¤ : -1, 0, 1
 
-        //float v = Input.GetAxis("Vertical");  // ¼öÁ÷ Å°: -1f ~ 1f
-        float v = Input.GetAxisRaw("Vertical");  // ¼öÁ÷ Å°: -1, 0, 1
+        //float v = Input.GetAxis("Vertical");  // ìˆ˜ì§ í‚¤: -1f ~ 1f
+        float v = Input.GetAxisRaw("Vertical");  // ìˆ˜ì§ í‚¤: -1, 0, 1
 
-        // ¹æÇâ ¸¸µé±â
+        // ë°©í–¥ ë§Œë“¤ê¸°
         Vector2 direction = new Vector2(h, v);
-        // º¤ÅÍ·ÎºÎÅÍ ¹æÇâ¸¸ °¡Á®¿À´Â °ÍÀ»: Á¤±ÔÈ­
+        // ë²¡í„°ë¡œë¶€í„° ë°©í–¥ë§Œ ê°€ì ¸ì˜¤ëŠ” ê²ƒì„: ì •ê·œí™”
         direction = direction.normalized;
         direction.Normalize();
 
 
         // transform.Translate(direction * Speed * Time.deltaTime);
 
-        // 1. »õ·Î¿î À§Ä¡ = ÇöÀç À§Ä¡ + ¹æÇâ * ¼Ó·Â * ½Ã°£
+        // 1. ìƒˆë¡œìš´ ìœ„ì¹˜ = í˜„ì¬ ìœ„ì¹˜ + ë°©í–¥ * ì†ë ¥ * ì‹œê°„
         Vector3 newPosition = transform.position + (Vector3)(direction * Speed) * Time.deltaTime;
 
-        // 2. Math.Clamp(ÇöÀç°ª, ÃÖ¼Ò°ª, ÃÖ´ë°ª)
+        // 2. Math.Clamp(í˜„ì¬ê°’, ìµœì†Œê°’, ìµœëŒ€ê°’)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
 
-        // 3. ³Ñ¾î°¡¸é ¹İ´ë·Î
+        // 3. ë„˜ì–´ê°€ë©´ ë°˜ëŒ€ë¡œ
         if (newPosition.x < MinX)
         {
             newPosition.x = MaxX;
@@ -85,16 +85,16 @@ public class PlayerMove : MonoBehaviour
             newPosition.x = MinX;
         }
 
-        // 4. À§Ä¡ °»½Å
+        // 4. ìœ„ì¹˜ ê°±ì‹ 
         transform.position = newPosition;
     }
 
     private void SpeedCheck()
     {
-        // 5. ½ºÇÇµå ¼öÁ¤
+        // 5. ìŠ¤í”¼ë“œ ìˆ˜ì •
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            // ¸ÅÁ÷³Ñ¹ö·Î ÇØµµ µÇ´Â ¼ıÀÚ: -1, 0, 1
+            // ë§¤ì§ë„˜ë²„ë¡œ í•´ë„ ë˜ëŠ” ìˆ«ì: -1, 0, 1
             Speed += Math.Min(10, Speed + 1);
         }
         else if (Input.GetKeyDown(KeyCode.E))

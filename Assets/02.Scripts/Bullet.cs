@@ -8,10 +8,10 @@ public enum BulletType
 
 public class Bullet : MonoBehaviour
 {
-    // ¸ñÇ¥: À§·Î °è¼Ó ÀÌµ¿ÇÏ°í ½Í´Ù.
+    // ëª©í‘œ: ìœ„ë¡œ ê³„ì† ì´ë™í•˜ê³  ì‹¶ë‹¤.
 
-    // ÇÊ¿ä ¼Ó¼º
-    // - ÀÌµ¿ ¼Óµµ
+    // í•„ìš” ì†ì„±
+    // - ì´ë™ ì†ë„
     public float Speed = 5;
 
     public BulletType BulletType;
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        // ÃÑ¾Ë Å¸ÀÔ¿¡ µû¶ó ´ë¹ÌÁö¸¦ ´Ù¸£°ÔÇÑ´Ù.
+        // ì´ì•Œ íƒ€ì…ì— ë”°ë¼ ëŒ€ë¯¸ì§€ë¥¼ ë‹¤ë¥´ê²Œí•œë‹¤.
         switch(BulletType)
         {
             case BulletType.Main:
@@ -34,15 +34,15 @@ public class Bullet : MonoBehaviour
     }
 
 
-    // ±â´É
-    // - °è¼Ó À§·Î ÀÌµ¿
+    // ê¸°ëŠ¥
+    // - ê³„ì† ìœ„ë¡œ ì´ë™
     private void Move()
     {
-        // ±¸Çö ¼ø¼­
-        // 1. ¹æÇâÀ» Á¤ÇÑ´Ù.
+        // êµ¬í˜„ ìˆœì„œ
+        // 1. ë°©í–¥ì„ ì •í•œë‹¤.
         Vector2 dir = Vector2.up;
 
-        // 2. ÀÌµ¿ÇÑ´Ù.
+        // 2. ì´ë™í•œë‹¤.
         transform.Translate(dir * Speed * Time.deltaTime);
     }
 
@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // ÃÑ¾Ë°ú Ãæµ¹:
+        // ì´ì•Œê³¼ ì¶©ëŒ:
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();

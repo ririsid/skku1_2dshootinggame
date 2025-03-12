@@ -8,33 +8,33 @@ public enum FireMode
 
 public class PlayerFire : MonoBehaviour
 {
-    // ¸ñÇ¥: ÃÑ¾ËÀ» ¸¸µé¾î¼­ ¹ß»çÇÏ°í ½Í´Ù.
+    // ëª©í‘œ: ì´ì•Œì„ ë§Œë“¤ì–´ì„œ ë°œì‚¬í•˜ê³  ì‹¶ë‹¤.
 
-    // ÇÊ¿ä ¼Ó¼º:
-    // - ÃÑ¾Ë ÇÁ¸®ÆÕ
+    // í•„ìš” ì†ì„±:
+    // - ì´ì•Œ í”„ë¦¬íŒ¹
     public GameObject BulletPrefab;
     public GameObject SubBulletPrefab;
     
-    // - ÃÑ±¸µé
+    // - ì´êµ¬ë“¤
     public GameObject[] Muzzles;
     public GameObject[] SubMuzzles;
 
-    // - ÄğÅ¸ÀÓ / ÄğÅ¸ÀÌ¸Ó
+    // - ì¿¨íƒ€ì„ / ì¿¨íƒ€ì´ë¨¸
     public float Cooltime  = 0.6f;
     public float Cooltimer = 0f;
 
-    // - ¸ğµå(ÀÚµ¿, ¼öµ¿)
+    // - ëª¨ë“œ(ìë™, ìˆ˜ë™)
     public FireMode FireMode = FireMode.Mannual;
 
 
     
-    // ÇÊ¿ä ±â´É:
-    // - ¹ß»çÇÏ´Ù.
+    // í•„ìš” ê¸°ëŠ¥:
+    // - ë°œì‚¬í•˜ë‹¤.
     private void Update()
     {
         Cooltimer -= Time.deltaTime;
 
-        // Å° ÀÔ·Â °Ë»ç
+        // í‚¤ ì…ë ¥ ê²€ì‚¬
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             FireMode = FireMode.Auto;
@@ -44,25 +44,25 @@ public class PlayerFire : MonoBehaviour
             FireMode = FireMode.Mannual;
         }
 
-        // ÄğÅ¸ÀÓÀÌ ¾ÆÁ÷ ¾ÈµÆÀ¸¸é Á¾·á
+        // ì¿¨íƒ€ì„ì´ ì•„ì§ ì•ˆëìœ¼ë©´ ì¢…ë£Œ
         if(Cooltimer > 0 )
         {
             return;
         }
 
-        // ÀÚµ¿ ¸ğµå ÀÌ°Å³ª "Fire1" ¹öÆ°ÀÌ ÀÔ·ÂµÇ¸é..
+        // ìë™ ëª¨ë“œ ì´ê±°ë‚˜ "Fire1" ë²„íŠ¼ì´ ì…ë ¥ë˜ë©´..
         if (FireMode == FireMode.Auto || Input.GetButtonDown("Fire1"))
         {
             foreach (GameObject muzzle in Muzzles)
             {
-                GameObject bullet = Instantiate(BulletPrefab); // ÀÎ½ºÅÏ½ºÈ­
+                GameObject bullet = Instantiate(BulletPrefab); // ì¸ìŠ¤í„´ìŠ¤í™”
 
                 bullet.transform.position = muzzle.transform.position;
             }
 
             foreach (GameObject subMuzzle in SubMuzzles)
             {
-                GameObject subBullet = Instantiate(SubBulletPrefab); // ÀÎ½ºÅÏ½ºÈ­
+                GameObject subBullet = Instantiate(SubBulletPrefab); // ì¸ìŠ¤í„´ìŠ¤í™”
 
                 subBullet.transform.position = subMuzzle.transform.position;
             }

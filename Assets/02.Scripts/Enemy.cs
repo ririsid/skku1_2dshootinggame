@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public int Health = 100;
     public int Damage = 40;
 
-    // ¸ÅÇÁ·¹ÀÓ¸¶´Ù ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼ö
+    // ë§¤í”„ë ˆì„ë§ˆë‹¤ ìë™ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     private void Update()
     {
         Vector2 dir = Vector2.down;
@@ -24,25 +24,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Ãæµ¹ ÀÌº¥Æ® ÇÔ¼ö
-    // - Trigger ÀÌº¥Æ®    : ¹°¸® ¿¬»êÀ» ¹«½ÃÇÏÁö¸¸, Ãæµ¹ ÀÌº¥Æ®¸¦ ¹Ş°Ú´Ù.
-    // - Collision ÀÌº¥Æ®  : ¹°¸® ¿¬»êµµ ÇÏ°í, Ãæµ¹ ÀÌº¥Æ®µµ ¹Ş°Ú´Ù.
+    // ì¶©ëŒ ì´ë²¤íŠ¸ í•¨ìˆ˜
+    // - Trigger ì´ë²¤íŠ¸    : ë¬¼ë¦¬ ì—°ì‚°ì„ ë¬´ì‹œí•˜ì§€ë§Œ, ì¶©ëŒ ì´ë²¤íŠ¸ë¥¼ ë°›ê² ë‹¤.
+    // - Collision ì´ë²¤íŠ¸  : ë¬¼ë¦¬ ì—°ì‚°ë„ í•˜ê³ , ì¶©ëŒ ì´ë²¤íŠ¸ë„ ë°›ê² ë‹¤.
 
-    // Ãæµ¹ ½ÃÀÛ, Ãæµ¹ Áß, Ãæµ¹ ³¡
+    // ì¶©ëŒ ì‹œì‘, ì¶©ëŒ ì¤‘, ì¶©ëŒ ë
 
-    // ´Ù¸¥ Äİ¶óÀÌ´õ¿Í Ãæµ¹ÀÌ ÀÏ¾î³µÀ»¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼ö
-    private void OnTriggerEnter2D(Collider2D other)   // Stay(Ãæµ¹Áß), Exit(Ãæµ¹³¡)
+    // ë‹¤ë¥¸ ì½œë¼ì´ë”ì™€ ì¶©ëŒì´ ì¼ì–´ë‚¬ì„ë•Œ ìë™ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
+    private void OnTriggerEnter2D(Collider2D other)   // Stay(ì¶©ëŒì¤‘), Exit(ì¶©ëŒë)
     {
         
-        // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹:
+        // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ:
         if(other.CompareTag("Player"))
         {
-            // ³ªÁ×ÀÚ
-            Destroy(this.gameObject);
-
-            // ÇÃ·¹ÀÌ¾î Ã¼·ÂÀÌ 0 ÀÌÇÏÀÏ¶§¸¸ Á×ÀÎ´Ù.
-            Player player = other.GetComponent<Player>(); // °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Â´Ù.
+            // í”Œë ˆì´ì–´ ì²´ë ¥ì´ 0 ì´í•˜ì¼ë•Œë§Œ ì£½ì¸ë‹¤.
+            Player player = other.GetComponent<Player>(); // ê²Œì„ ì˜¤ë¸Œì íŠ¸ì˜ ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
             player.TakeDamage(Damage);
+
+            // ë‚˜ì£½ì
+            Destroy(this.gameObject);
         }
 
     }
