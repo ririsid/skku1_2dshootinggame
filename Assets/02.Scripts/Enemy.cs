@@ -1,17 +1,49 @@
 using UnityEngine;
- 
+
+public enum EnemyType
+{
+    Basic  = 0,
+    Target = 1
+}
 
 public class Enemy : MonoBehaviour
 {
+    [Header("적 타입")]
+    public EnemyType EnemyType;
+    
     public float Speed = 5f;
     public int Health = 100;
     public int Damage = 40;
+    
+    private Vector2 _direction;
+
+    private void Start()
+    {
+        switch (EnemyType)
+        {
+            case EnemyType.Basic:
+            {
+                _direction = Vector2.down;
+                break;
+            }
+
+            case EnemyType.Target:
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                // 방향을 구한다. (target - me)
+                _direction = player.transform.position - this.transform.position;
+                _direction.Normalize(); // 정규화
+                break;
+            }
+                
+        }
+    }
+    
 
     // 매프레임마다 자동으로 호출되는 함수
     private void Update()
     {
-        Vector2 dir = Vector2.down;
-        transform.Translate(dir * Speed * Time.deltaTime);
+        transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
     public void TakeDamage(int damage)

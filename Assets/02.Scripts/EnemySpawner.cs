@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     private float _currentTimer = 0f;
     
     // 적 프리팹
-    public GameObject EnemyPrefab;
+    public GameObject[] EnemyPrefabs;
 
 
     private void Update()
@@ -24,9 +24,28 @@ public class EnemySpawner : MonoBehaviour
         {
             _currentTimer = 0f;
             
+            // IntervalTime = 0.6 ~ 1.5;
+            IntervalTime = UnityEngine.Random.Range(0.6f, 1.5f);
+            // 의사난수알고리즘
+            // 1) 시드가 같아야한다.
+            // 2) 알고리즘이 같아야한다.   Random.Range, C#, C++ STL 여러 가지 랜덤 엔진
+            // 3) 호출 횟수가 같아야한다.
+            
             // 3. 스폰을 한다.
-            GameObject enemy = Instantiate(EnemyPrefab);
+            GameObject enemy = null;
+            if (UnityEngine.Random.Range(0f, 1f) <= 0.7f) // 70%
+            {
+                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Basic]);
+            }
+            else
+            {
+                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Target]);
+            }
+            
             enemy.transform.position = this.transform.position;
+           
+            
+            
         }
         
         
