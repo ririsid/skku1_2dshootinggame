@@ -1,8 +1,11 @@
 using UnityEngine;
+ 
 
 public class Enemy : MonoBehaviour
 {
     public float Speed = 5f;
+    public int Health = 100;
+    public int Damage = 40;
 
     // 매프레임마다 자동으로 호출되는 함수
     private void Update()
@@ -21,15 +24,37 @@ public class Enemy : MonoBehaviour
     // 다른 콜라이더와 충돌이 일어났을때 자동으로 호출되는 함수
     private void OnTriggerEnter2D(Collider2D other)   // Stay(충돌중), Exit(충돌끝)
     {
+        // 총알과 충돌:
         if(other.CompareTag("Bullet"))
         {
-            // Destory: 게임 오브젝트를 파괴!
-
             // 너죽고
             Destroy(other.gameObject);
 
             // 나죽자
-            Destroy(this.gameObject);
+            Bullet bullet = other.GetComponent<Bullet>();
+            Health -= bullet.Damage;
+
+            if (Health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
+
+        // 플레이어와 충돌:
+        if(other.CompareTag("Player"))
+        {
+            // 나죽자
+            Destroy(this.gameObject);
+
+            // 플레이어 체력이 0 이하일때만 죽인다.
+            Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
+            
+            player.Health -= Damage;
+            if(player.Health <= 0)
+            {
+                Destroy(player.gameObject);
+            }
+        }
+
     }
 }
