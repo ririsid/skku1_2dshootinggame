@@ -51,4 +51,16 @@ public class Bullet : MonoBehaviour
     {
         Move();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // ÃÑ¾Ë°ú Ãæµ¹:
+        if (other.CompareTag("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(Damage);
+
+            Destroy(this.gameObject);
+        }
+    }
 }
