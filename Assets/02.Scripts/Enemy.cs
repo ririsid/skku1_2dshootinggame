@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
         {
             // 플레이어 체력이 0 이하일때만 죽인다.
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
+
+            // 묻지말고 시켜라!
             player.TakeDamage(Damage);
 
             // 나죽자
