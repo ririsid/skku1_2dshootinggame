@@ -13,61 +13,57 @@ public class PlayerMove : MonoBehaviour
     public float MinX, MaxX;
     public float MinY, MaxY;
 
+    private GameObject _target = null;
 
     void Update()
     {
-
-        // 게임 오브젝트에 transform이라는 컴포넌트는 무조건 있으므로
-        // transform에 쉽게 접근할 수 있도록 만들어놨다.
-
-        // transform.Translate -> 이동하다라는 뜻으로 매개 변수로 '속도'을 받는다.
-        // 속도: 방향 * 속력
-
-
-
-        // 벡터   : 크기와 방향 
-        // 왼쪽으로 100
-
-
-        // 초당 3M(unit)만큼 위로 움직여라!
-        // transform.Translate(Vector2.up * 3f * Time.deltaTime);
-        // Vector2 d = Vector2.up;
-        // Time.deltaTime: 프레임 간 시간 간격을 의미한다.
-        // 4프레임은 Time.deltaTime: 1/4 = 0.25초     
-        // 3*0.25 + 3 * 0.25 + 3 * 0.25 + 3 * 0.25 = 3
-
-
-        // 2프레임은 Time.deltaTime: 1/2 = 0.5초
-        // 3*0.5 + 3*0.5 = 3
-
-        // 30프레임은 Time.deltaTime: 1/30 = 0.03초
-        // 60프레임은 Time.deltaTime: 1/60 = 0.016초
-
-
         SpeedCheck();
-
-        Move();
+        
+        
+        ManualMove();
     }
 
-
-    private void Move()
+    private void AutoMove()
     {
-        // 키보드, 마우스, 터치, 조이스틱 등 외부에서 들어오는
-        // 입력 소스는 모오오두 'Input' 클래스를 통해 관리할 수 있다.
-        //float h = Input.GetAxis("Horizontal"); // 수평 키 : -1f ~ 1f
-        float h = Input.GetAxisRaw("Horizontal"); // 수평 키 : -1, 0, 1
+        FindClosestTarget();
+        
+        // ToDo: _target을 이용해서 이동 코드 작성
+    }
 
-        //float v = Input.GetAxis("Vertical");  // 수직 키: -1f ~ 1f
+    private void FindClosestTarget()
+    {
+        // 타겟이 없다면:
+        if (_target == null)
+        {
+            // 모든 타겟을 찾는다.
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            float distance = Mathf.Infinity;
+            // 가장 나와 거리가 짧은 적 찾기
+            foreach (GameObject enemy in enemies)
+            {
+                // 거리가 저장한것보다 짧으면
+                float targetDistance = Vector2.Distance(transform.position, enemy.transform.position);
+                if (targetDistance < distance)
+                {
+                    // 타겟을 갱신한다.
+                    distance = targetDistance;
+                    _target = enemy;
+                }
+            }
+        }
+    }
+    
+    
+    private void ManualMove()
+    {
+        float h = Input.GetAxisRaw("Horizontal"); // 수평 키 : -1, 0, 1
         float v = Input.GetAxisRaw("Vertical");  // 수직 키: -1, 0, 1
 
-        // 방향 만들기
         Vector2 direction = new Vector2(h, v);
-        // 벡터로부터 방향만 가져오는 것을: 정규화
         direction = direction.normalized;
         direction.Normalize();
 
 
-        // transform.Translate(direction * Speed * Time.deltaTime);
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
         Vector3 newPosition = transform.position + (Vector3)(direction * Speed) * Time.deltaTime;
