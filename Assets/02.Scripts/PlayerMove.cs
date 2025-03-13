@@ -33,6 +33,7 @@ public class PlayerMove : MonoBehaviour
 
     private void AutoMove()
     {
+        // 가장 가까운 적을 찾아서 _target에 저장
         FindClosestTarget();
         
         // ToDo: _target을 이용해서 이동 코드 작성
@@ -40,24 +41,24 @@ public class PlayerMove : MonoBehaviour
 
     private void FindClosestTarget()
     {
-        // 타겟이 없다면:
-        if (_target == null)
+        // 이미 타겟이 있으면 아무것도 안한다.
+        if (_target != null) return;
+        
+        // 모든 타겟을 찾는다.
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float distance = Mathf.Infinity;
+        // 가장 나와 거리가 짧은 적 찾기
+        foreach (GameObject enemy in enemies)
         {
-            // 모든 타겟을 찾는다.
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            float distance = Mathf.Infinity;
-            // 가장 나와 거리가 짧은 적 찾기
-            foreach (GameObject enemy in enemies)
+            // 거리가 저장한것보다 짧으면
+            float targetDistance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (targetDistance < distance)
             {
-                // 거리가 저장한것보다 짧으면
-                float targetDistance = Vector2.Distance(transform.position, enemy.transform.position);
-                if (targetDistance < distance)
-                {
-                    // 타겟을 갱신한다.
-                    distance = targetDistance;
-                    _target = enemy;
-                }
+                // 타겟을 갱신한다.
+                distance = targetDistance;
+                _target = enemy;
             }
+        
         }
     }
     
