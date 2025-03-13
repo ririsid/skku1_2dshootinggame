@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour
 
     // 최종 목표: 키보드 입력에 따라 플레이어를 이동시키고 싶다.
 
+    public Player MyPlayer;
+
     public float Speed = 3f;
 
     public float MinX, MaxX;
@@ -18,9 +20,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         SpeedCheck();
-        
-        
-        ManualMove();
+
+        if (MyPlayer.PlayMode == PlayMode.Auto)
+        {
+            AutoMove();
+        }
+        else
+        {
+            ManualMove();
+        }
     }
 
     private void AutoMove()

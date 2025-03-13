@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd1cb9a7a5cc6c45b508d677c293142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyPlayer: {fileID: 74543905}
   Speed: 3
   MinX: -2.5
   MaxX: 2.5
@@ -275,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8489bb8e301d02846aa7b63101e86846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyPlayer: {fileID: 74543905}
   BulletPrefab: {fileID: 1182273936020812354, guid: 927034504db58274eb4cbd4029d4afce, type: 3}
   SubBulletPrefab: {fileID: 5069529581313124235, guid: c9265193640858c49a3c23f5cb5e6f7c, type: 3}
   Muzzles:
@@ -285,7 +287,6 @@ MonoBehaviour:
   - {fileID: 128952056}
   Cooltime: 0.6
   Cooltimer: 0
-  FireMode: 1
 --- !u!61 &74543903
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -373,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Defence: 0.2
+  PlayMode: 1
 --- !u!1 &128952056
 GameObject:
   m_ObjectHideFlags: 0

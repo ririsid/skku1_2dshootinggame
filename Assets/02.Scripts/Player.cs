@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
 
     public float Defence = 0.2f;
     
+    // - 모드(자동, 수동)
+    public PlayMode PlayMode = PlayMode.Mannual;
+    
     public void TakeDamage(int damage)
     {
         Health -= (int)(damage * Defence);
@@ -19,5 +22,19 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Update()
+    {
+        // 키 입력 검사
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayMode = PlayMode.Auto;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayMode = PlayMode.Mannual;
+        }
+
     }
 }

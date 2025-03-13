@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum FireMode
+public enum PlayMode
 {
     Auto,
     Mannual
@@ -10,6 +10,8 @@ public class PlayerFire : MonoBehaviour
 {
     // 목표: 총알을 만들어서 발사하고 싶다.
 
+    public Player MyPlayer;
+    
     // 필요 속성:
     // - 총알 프리팹
     public GameObject BulletPrefab;
@@ -23,8 +25,7 @@ public class PlayerFire : MonoBehaviour
     public float Cooltime  = 0.6f;
     public float Cooltimer = 0f;
 
-    // - 모드(자동, 수동)
-    public FireMode FireMode = FireMode.Mannual;
+
 
 
     
@@ -33,17 +34,7 @@ public class PlayerFire : MonoBehaviour
     private void Update()
     {
         Cooltimer -= Time.deltaTime;
-
-        // 키 입력 검사
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            FireMode = FireMode.Auto;
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            FireMode = FireMode.Mannual;
-        }
-
+        
         // 쿨타임이 아직 안됐으면 종료
         if(Cooltimer > 0 )
         {
@@ -51,7 +42,7 @@ public class PlayerFire : MonoBehaviour
         }
 
         // 자동 모드 이거나 "Fire1" 버튼이 입력되면..
-        if (FireMode == FireMode.Auto || Input.GetButtonDown("Fire1"))
+        if (MyPlayer.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
         {
             foreach (GameObject muzzle in Muzzles)
             {
