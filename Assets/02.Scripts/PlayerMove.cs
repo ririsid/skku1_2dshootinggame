@@ -16,6 +16,15 @@ public class PlayerMove : MonoBehaviour
     public float MinY, MaxY;
 
     private GameObject _target = null;
+    private int UNDER_LINE;
+
+    public PlayerMove()
+    {
+        UNDER_LINE = 4;
+    }
+
+    private const float THRESHOLD = 0.01f;
+    private const float DETACTION_RANGE = 6;
 
     void Update()
     {
@@ -35,8 +44,58 @@ public class PlayerMove : MonoBehaviour
     {
         // 가장 가까운 적을 찾아서 _target에 저장
         FindClosestTarget();
+
+        // 적이 없다면 아무고또 안한다.
+        if (_target == null) return;
         
-        // ToDo: _target을 이용해서 이동 코드 작성
+        // _target을 이용해서 이동 코드 작성
+        Vector2 direction = _target.transform.position - transform.position;
+        float distance = direction.magnitude;
+        
+        // 달달달거리지 않게
+        if (Mathf.Abs(direction.x) <= THRESHOLD)
+        {
+            direction.x = 0;
+        }
+        
+        // 멀면 앞으로 가까우면 뒤로
+        if (distance > DETACTION_RANGE)
+        {
+            direction.y = 1;
+        }
+        else if (transform.position.y < -UNDER_LINE)
+        {
+            direction.y = 0;
+        }
+        else
+        {
+            direction.y = -1;
+        }
+
+        
+        
+        
+        direction.Normalize();
+        
+        
+        // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
+        Vector3 newPosition = transform.position + (Vector3)(direction * Speed) * Time.deltaTime;
+
+        // 2. Math.Clamp(현재값, 최소값, 최대값)
+        newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
+
+        // 3. 넘어가면 반대로
+        if (newPosition.x < MinX)
+        {
+            newPosition.x = MaxX;
+        }
+        else if (newPosition.x > MaxX)
+        {
+            newPosition.x = MinX;
+        }
+
+        // 4. 위치 갱신
+        transform.position = newPosition;
     }
 
     // 가장 가까운 적을 찾는다.
