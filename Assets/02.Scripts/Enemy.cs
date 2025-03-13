@@ -3,7 +3,8 @@ using UnityEngine;
 public enum EnemyType
 {
     Basic  = 0,
-    Target = 1
+    Target = 1,
+    Follow = 2,
 }
 
 public class Enemy : MonoBehaviour
@@ -14,8 +15,10 @@ public class Enemy : MonoBehaviour
     public float Speed = 5f;
     public int Health = 100;
     public int Damage = 40;
-    
+
+    private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
+    
 
     private void Start()
     {
@@ -29,20 +32,35 @@ public class Enemy : MonoBehaviour
 
             case EnemyType.Target:
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                // 방향을 구한다. (target - me)
-                _direction = player.transform.position - this.transform.position;
-                _direction.Normalize(); // 정규화
+                SetDirection();
                 break;
             }
                 
         }
     }
-    
+
+    // 함수란: 반복해서 사용할 코드를 이름 하나로 만들어 놓은 코드의 집
+    private void SetDirection()
+    {
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+        }
+        
+        // 방향을 구한다. (target - me)
+        _direction = _player.transform.position - this.transform.position;
+        _direction.Normalize(); // 정규화
+    }
 
     // 매프레임마다 자동으로 호출되는 함수
     private void Update()
     {
+        // 타겟형이 매번 방향을 갱신
+        if (EnemyType == EnemyType.Follow)
+        {
+            SetDirection();
+        }
+        
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
 

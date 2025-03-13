@@ -33,13 +33,19 @@ public class EnemySpawner : MonoBehaviour
             
             // 3. 스폰을 한다.
             GameObject enemy = null;
-            if (UnityEngine.Random.Range(0f, 1f) <= 0.7f) // 70%
+            
+            float percentage = Random.Range(0f, 1f);
+            if (percentage <= 0.5f) // 50%
             {
                 enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Basic]);
             }
-            else
+            else if (percentage <= 0.8f)
             {
                 enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Target]);
+            }
+            else
+            {
+                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Follow]);
             }
             
             enemy.transform.position = this.transform.position;

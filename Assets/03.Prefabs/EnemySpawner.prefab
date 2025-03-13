@@ -48,3 +48,4 @@ MonoBehaviour:
   EnemyPrefabs:
   - {fileID: 2917420210104248268, guid: 747591b31e24e574e8b5d9037d22698f, type: 3}
   - {fileID: 2917420210104248268, guid: c9a951094aa2b364a9c794a484022de6, type: 3}
+  - {fileID: 2917420210104248268, guid: 2150838df0c15ca42b8fe7d05f313794, type: 3}
