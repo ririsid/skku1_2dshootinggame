@@ -39,15 +39,17 @@ public class PlayerMove : MonoBehaviour
         // ToDo: _target을 이용해서 이동 코드 작성
     }
 
+    // 가장 가까운 적을 찾는다.
     private void FindClosestTarget()
     {
         // 이미 타겟이 있으면 아무것도 안한다.
         if (_target != null) return;
         
-        // 모든 타겟을 찾는다.
+        // 모든 적을 찾는다.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float distance = Mathf.Infinity;
+        
         // 가장 나와 거리가 짧은 적 찾기
+        float distance = Mathf.Infinity;
         foreach (GameObject enemy in enemies)
         {
             // 거리가 저장한것보다 짧으면
