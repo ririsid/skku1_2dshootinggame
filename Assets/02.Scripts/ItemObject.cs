@@ -16,13 +16,20 @@ public class ItemObject : MonoBehaviour
     
     public float Value;
 
+    // 시간을 체크할 타이머
+    private float _timer = 0f;
+
     // 둘 다 콜라이더가 무조건 있어야하고
     // 하나 이상이 리지드바디 있어야 한다.
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerStay2D(Collider2D other)
     {
-        // 플레이어와만 충돌
         if (other.CompareTag("Player"))
         {
+            _timer += Time.deltaTime;
+
+            if (_timer < 1f) return;
+
             // 효과 발동!
             Player player = other.GetComponent<Player>();
 
@@ -48,7 +55,7 @@ public class ItemObject : MonoBehaviour
                 }
             }
             
-            Destroy(gameObject);
+            Destroy(gameObject);  
         }
     }
 }
