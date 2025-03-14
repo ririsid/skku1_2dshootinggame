@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyPlayer: {fileID: 74543905}
-  Speed: 3
   MinX: -2.5
   MaxX: 2.5
   MinY: -5.3
@@ -285,7 +284,6 @@ MonoBehaviour:
   SubMuzzles:
   - {fileID: 34074388}
   - {fileID: 128952056}
-  Cooltime: 0.6
   Cooltimer: 0
 --- !u!61 &74543903
 BoxCollider2D:
@@ -373,6 +371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  MoveSpeed: 3
+  AttackCooltime: 0.6
   Defence: 0.2
   PlayMode: 1
 --- !u!1 &128952056

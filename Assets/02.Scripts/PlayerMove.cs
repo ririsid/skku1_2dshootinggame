@@ -10,7 +10,6 @@ public class PlayerMove : MonoBehaviour
 
     public Player MyPlayer;
 
-    public float Speed = 3f;
 
     public float MinX, MaxX;
     public float MinY, MaxY;
@@ -79,7 +78,7 @@ public class PlayerMove : MonoBehaviour
         
         
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * Speed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -136,7 +135,7 @@ public class PlayerMove : MonoBehaviour
 
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * Speed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -161,11 +160,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // 매직넘버로 해도 되는 숫자: -1, 0, 1
-            Speed += Math.Min(10, Speed + 1);
+            MyPlayer.MoveSpeed += Math.Min(10, MyPlayer.MoveSpeed + 1);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            Speed = Math.Max(1, Speed - 1);
+            MyPlayer.MoveSpeed = Math.Max(1, MyPlayer.MoveSpeed - 1);
         }
     }
 }

@@ -7,7 +7,10 @@ public class Player : MonoBehaviour
     // 결합도: 두 클래스간에 상호작용 의존 정도
     // 내 코드가 그렇게 이상한가요?(C#) -> 도메인 주도 설계 철저 입문(C#)
     
-    public int Health = 100;
+    
+    public int   Health = 100;
+    public float MoveSpeed = 3f;
+    public float AttackCooltime  = 0.6f;
 
     public float Defence = 0.2f;
     

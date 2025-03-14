@@ -18,8 +18,11 @@ public class Enemy : MonoBehaviour
 
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
-    
 
+
+    public GameObject[] ItemPrefabs;
+    
+    
     private void Start()
     {
         switch (EnemyType)
@@ -70,10 +73,25 @@ public class Enemy : MonoBehaviour
 
         if (Health <= 0)
         {
+            OnDeath();
             Destroy(this.gameObject);
         }
     }
+    // 죽었을때 호출되는 함수
+    private void OnDeath()
+    {
+        // 30% 확률로
+        if (Random.Range(0f, 1f) < 0.3f)
+        {
+            // 랜덤한 아이템 생성
+            GameObject itemObject = Instantiate(ItemPrefabs[Random.Range(0, ItemPrefabs.Length)]);
+            itemObject.transform.position = this.transform.position;
+        }
+    }
 
+    
+    
+    
     // 충돌 이벤트 함수
     // - Trigger 이벤트    : 물리 연산을 무시하지만, 충돌 이벤트를 받겠다.
     // - Collision 이벤트  : 물리 연산도 하고, 충돌 이벤트도 받겠다.

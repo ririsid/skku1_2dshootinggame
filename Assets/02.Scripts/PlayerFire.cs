@@ -22,7 +22,6 @@ public class PlayerFire : MonoBehaviour
     public GameObject[] SubMuzzles;
 
     // - 쿨타임 / 쿨타이머
-    public float Cooltime  = 0.6f;
     public float Cooltimer = 0f;
 
 
@@ -58,7 +57,7 @@ public class PlayerFire : MonoBehaviour
                 subBullet.transform.position = subMuzzle.transform.position;
             }
 
-            Cooltimer = Cooltime;
+            Cooltimer = MyPlayer.AttackCooltime;
         }
     }
 
