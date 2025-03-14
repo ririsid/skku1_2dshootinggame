@@ -1,6 +1,7 @@
 using System;
 using UnityEditorInternal;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public enum ItemType
@@ -14,7 +15,7 @@ public class ItemObject : MonoBehaviour
 {
     public ItemType ItemType;
 
-    public float MoveSpeed = 3f;
+    public float MoveSpeed = 2f;
     
     public float Value;
 
@@ -37,13 +38,33 @@ public class ItemObject : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
     }
+
+
+    private float _percent = 0f;
+
+    private Vector2 _controlVector = Vector2.zero;
     
-    
+    private bool _isMoving = false;
+    private float _duration = 0;
     private void Update()
     {
-        if (Vector2.Distance(transform.position, _player.transform.position) < 1f)
+        float distance = Vector2.Distance(transform.position, _player.transform.position); // 3 
+        if (distance < 3f)
         {
-            //transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, Time.deltaTime * MoveSpeed);
+            _isMoving = true;
+            _duration = distance / MoveSpeed; // 10/2 -> 5
+        }
+
+        if (_isMoving)
+        {
+            if (_controlVector == Vector2.zero)
+            {
+                _controlVector =  transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            }
+
+            _percent += Time.deltaTime / _duration;
+            
+            transform.position = Bezier(transform.position, _controlVector, _player.transform.position, _percent);
         }
     }
 
@@ -71,8 +92,13 @@ public class ItemObject : MonoBehaviour
     {
         Debug.Log("상위: OnTriggerEnter2D");
     }
-    
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.otherCollider);    
+    }
+
+
     private void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log("상위: OnTriggerExit2D");
