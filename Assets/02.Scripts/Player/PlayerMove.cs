@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     private GameObject _target = null;
     private int UNDER_LINE;
 
+    public Animator MyAnimator;
+
     public PlayerMove()
     {
         UNDER_LINE = 4;
@@ -25,7 +27,13 @@ public class PlayerMove : MonoBehaviour
     private const float THRESHOLD = 0.01f;
     private const float DETACTION_RANGE = 6;
 
-    void Update()
+    // Start 보다 먼저 호출되며 프리팹이 인스턴스화 된 직후 호출
+    private void Awake()
+    {
+        MyAnimator = GetComponent<Animator>();
+    }
+    
+    private void Update()
     {
         SpeedCheck();
 
@@ -57,6 +65,8 @@ public class PlayerMove : MonoBehaviour
             direction.x = 0;
         }
         
+        PlayAnimation(direction);
+
         // 멀면 앞으로 가까우면 뒤로
         if (distance > DETACTION_RANGE)
         {
@@ -132,6 +142,7 @@ public class PlayerMove : MonoBehaviour
         direction = direction.normalized;
         direction.Normalize();
 
+        PlayAnimation(direction);
 
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
@@ -166,5 +177,27 @@ public class PlayerMove : MonoBehaviour
         {
             MyPlayer.MoveSpeed = Math.Max(1, MyPlayer.MoveSpeed - 1);
         }
+    }
+
+
+    private void PlayAnimation(Vector2 direction)
+    {
+        // 1. 직접 애니메이터에게 특정 애니메이션 클립(상태)을 실행하라고 명령
+        /*if (direction.x == 0)
+        {
+            MyAnimator.Play("Player_Idle");
+        }
+        else if (direction.x < 0)
+        {
+            MyAnimator.Play("Player_Left");
+        }
+        else if (direction.x > 0)
+        {
+            MyAnimator.Play("Player_Right");
+        }*/
+        
+        // 2. 상태 전이
+        // -0.03 -> (int)-0.03 -> -1
+        MyAnimator.SetInteger("x", direction.x < 0 ? -1 : direction.x > 0 ? 1 : 0);
     }
 }
