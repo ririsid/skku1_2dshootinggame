@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private Animator _animator;
 
     public GameObject[] ItemPrefabs;
+    public GameObject ExplosionVFXPrefab;
     
     private void Awake()
     {
@@ -99,6 +100,10 @@ public class Enemy : MonoBehaviour
     // 죽었을때 호출되는 함수
     private void OnDeath()
     {
+        // 폭발 이펙트를 생성
+        GameObject vfx = Instantiate(ExplosionVFXPrefab);
+        vfx.transform.position = this.transform.position;
+        
         // 30% 확률로
         if (Random.Range(0f, 1f) < 0.3f)
         {

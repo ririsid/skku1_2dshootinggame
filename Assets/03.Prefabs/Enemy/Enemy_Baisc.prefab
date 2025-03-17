@@ -111,6 +111,7 @@ MonoBehaviour:
   - {fileID: 9120490128172919261, guid: feb9c676ca5e01247ab0146ddf113423, type: 3}
   - {fileID: 185569316825520367, guid: 7275a97d060e83748a27b1c19a3d9a50, type: 3}
   - {fileID: 1558162560451030827, guid: f5801a5af06a7c0479b18237032aea31, type: 3}
+  ExplosionVFXPrefab: {fileID: 2053940262934968344, guid: dac8d9a9e2458b94c92c5f56fa83a24c, type: 3}
 --- !u!60 &3992936361890954934
 PolygonCollider2D:
   m_ObjectHideFlags: 0
