@@ -18,9 +18,15 @@ public class Enemy : MonoBehaviour
 
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
-
+    
+    private Animator _animator;
 
     public GameObject[] ItemPrefabs;
+    
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
     
     
     private void Start()
@@ -75,6 +81,10 @@ public class Enemy : MonoBehaviour
         {
             OnDeath();
             Destroy(this.gameObject);
+        }
+        else
+        {
+            _animator.SetTrigger("Hit");
         }
     }
     // 죽었을때 호출되는 함수
