@@ -22,6 +22,9 @@ public class ItemObject : MonoBehaviour
     // 시간을 체크할 타이머
     private float _timer = 0f;
 
+    private const float DELETE_TIME = 5f;
+    private float _deleteTimer = 0f;
+
     // 둘 다 콜라이더가 무조건 있어야하고
     // 하나 이상이 리지드바디 있어야 한다.
 
@@ -65,6 +68,14 @@ public class ItemObject : MonoBehaviour
             _percent += Time.deltaTime / _duration;
             
             transform.position = Bezier(transform.position, _controlVector, _player.transform.position, _percent);
+        }
+        else
+        {
+            _deleteTimer += Time.deltaTime;
+            if (_deleteTimer >= DELETE_TIME)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

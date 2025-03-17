@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7968323116880565516}
   - component: {fileID: 2838385717228753108}
   - component: {fileID: 4465877895991985551}
+  - component: {fileID: 7970276860312160785}
   m_Layer: 0
   m_Name: ItemObject_AttackSpeedUp
   m_TagString: Untagged
@@ -168,3 +169,25 @@ MonoBehaviour:
   ItemType: 1
   MoveSpeed: 3
   Value: -0.005
+--- !u!95 &7970276860312160785
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120490128172919261}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37519d8d14a022441bb20dde001e8393, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -59,7 +59,14 @@ public class Enemy : MonoBehaviour
         // 방향을 구한다. (target - me)
         _direction = _player.transform.position - this.transform.position;
         _direction.Normalize(); // 정규화
+        
+        float radian = Mathf.Atan2(_direction.y, _direction.x);
+        // radian = Mathf.Atan(_direction.y / _direction.x);
+        float angle = Mathf.Rad2Deg * radian + 90;
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
+    
+    
 
     // 매프레임마다 자동으로 호출되는 함수
     private void Update()
@@ -70,7 +77,9 @@ public class Enemy : MonoBehaviour
             SetDirection();
         }
         
-        transform.Translate(_direction * Speed * Time.deltaTime);
+        //transform.Translate(_direction * Speed * Time.deltaTime);
+        // Translate 조향이 필요할 때 쓰는게 좋다.
+        transform.position += (Vector3)_direction * Speed * Time.deltaTime;
     }
 
     public void TakeDamage(int damage)
