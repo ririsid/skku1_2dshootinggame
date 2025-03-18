@@ -8,7 +8,8 @@ public enum ItemType
 {
     HealthUp,
     AttackSpeedUp,
-    MoveSpeedUp
+    MoveSpeedUp,
+    Magnet
 }
 
 public class ItemObject : MonoBehaviour
@@ -49,6 +50,14 @@ public class ItemObject : MonoBehaviour
 
     private bool _isMoving = false;
     private float _duration = 0;
+
+    private bool _isMagnetized = false;
+    public bool IsMagnetized
+    {
+        get; set;
+    }
+    private Vector2 _direction;
+
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, _player.transform.position); // 3 
@@ -58,7 +67,13 @@ public class ItemObject : MonoBehaviour
             _duration = distance / MoveSpeed; // 10/2 -> 5
         }
 
-        if (_isMoving)
+        if (_isMagnetized)
+        {
+            _direction = _player.transform.position - this.transform.position;
+            _direction.Normalize();
+            transform.position += (Vector3)_direction * MoveSpeed * Time.deltaTime;
+        }
+        else if (_isMoving)
         {
             if (_controlVector == Vector2.zero)
             {
@@ -157,6 +172,12 @@ public class ItemObject : MonoBehaviour
                 case ItemType.MoveSpeedUp:
                     {
                         player.MoveSpeed += Value;
+                        break;
+                    }
+
+                case ItemType.Magnet:
+                    {
+                        player.EatAllItems();
                         break;
                     }
             }

@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 3389942447874383490}
   - component: {fileID: 3666955982701876623}
   m_Layer: 0
-  m_Name: ItemObject_MoveSpeedUp
-  m_TagString: Untagged
+  m_Name: ItemObject_Magnet
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.17254902, g: 0.4784314, b: 0.9294118, a: 1}
+  m_Sprite: {fileID: 1997828774, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237d19f8b77c00b4cac241b8d191b237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemType: 1
+  ItemType: 3
   MoveSpeed: 3
   Value: -0.005
 --- !u!95 &3389942447874383490
@@ -178,7 +178,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558162560451030827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 37519d8d14a022441bb20dde001e8393, type: 2}
   m_CullingMode: 0
