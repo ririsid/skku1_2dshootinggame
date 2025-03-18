@@ -84,13 +84,13 @@ public class Enemy : MonoBehaviour
         transform.position += (Vector3)_direction * Speed * Time.deltaTime;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Damage damage)
     {
-        Health -= damage;
+        Health -= damage.Value;
 
         if (Health <= 0)
         {
-            OnDeath();
+            OnDeath(damage);
             Destroy(this.gameObject);
         }
         else
@@ -99,14 +99,17 @@ public class Enemy : MonoBehaviour
         }
     }
     // 죽었을때 호출되는 함수
-    private void OnDeath()
+    private void OnDeath(Damage damage)
     {
         // 폭발 이펙트를 생성
         GameObject vfx = Instantiate(ExplosionVFXPrefab);
         vfx.transform.position = this.transform.position;
         
         // 플레이어 붐에게 나 죽었음을 알린다.
-        GameObject.FindWithTag("Player").GetComponent<PlayerBoom>().AddKillCount();
+        if (damage.Type == DamageType.Bullet)
+        {
+            GameObject.FindWithTag("Player").GetComponent<PlayerBoom>().AddKillCount();
+        }
         
         // 30% 확률로
         if (Random.Range(0f, 1f) < 0.3f)

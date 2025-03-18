@@ -35,7 +35,14 @@ public class Boom : MonoBehaviour
         {
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy == null) return;
-            enemy.TakeDamage(100000);
+
+            Damage damage = new Damage
+            {
+                Value = 100000,
+                Type = DamageType.Boom,
+            };
+
+            enemy.TakeDamage(damage);
         }
     }
 }

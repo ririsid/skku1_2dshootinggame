@@ -57,8 +57,14 @@ public class Bullet : MonoBehaviour
         // 총알과 충돌:
         if (other.CompareTag("Enemy"))
         {
+            Damage damage = new Damage
+            {
+                Value = Damage,
+                Type = DamageType.Bullet,
+            };
+            
             Enemy enemy = other.GetComponent<Enemy>();
-            enemy.TakeDamage(Damage);
+            enemy.TakeDamage(damage);
 
             Destroy(this.gameObject);
         }
