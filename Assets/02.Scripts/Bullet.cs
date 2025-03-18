@@ -3,7 +3,8 @@ using UnityEngine;
 public enum BulletType
 {
     Main,
-    Sub
+    Sub,
+    Pet
 }
 
 public class Bullet : MonoBehaviour
@@ -17,22 +18,6 @@ public class Bullet : MonoBehaviour
     public BulletType BulletType;
 
     public int Damage;
-
-    private void Start()
-    {
-        // 총알 타입에 따라 대미지를 다르게한다.
-        switch (BulletType)
-        {
-            case BulletType.Main:
-                Damage = 100;
-                break;
-
-            case BulletType.Sub:
-                Damage = 60;
-                break;
-        }
-    }
-
 
     // 기능
     // - 계속 위로 이동
