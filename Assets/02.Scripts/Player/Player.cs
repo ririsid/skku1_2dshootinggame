@@ -17,14 +17,32 @@ public class Player : MonoBehaviour
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
 
+    private CameraShake cameraShake;
+
     public void TakeDamage(int damage)
     {
         Health -= (int)(damage * Defence);
+
+        cameraShake.Shake();
 
         if (Health <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void EatAllItems()
+    {
+        var itemObjects = GameObject.FindGameObjectsWithTag("Item");
+        foreach (var itemObject in itemObjects)
+        {
+            itemObject.GetComponent<ItemObject>().IsMagnetized = true;
+        }
+    }
+
+    private void Start()
+    {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     private void Update()
@@ -37,15 +55,6 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             PlayMode = PlayMode.Mannual;
-        }
-    }
-
-    public void EatAllItems()
-    {
-        var itemObjects = GameObject.FindGameObjectsWithTag("Item");
-        foreach (var itemObject in itemObjects)
-        {
-            itemObject.GetComponent<ItemObject>().IsMagnetized = true;
         }
     }
 }
