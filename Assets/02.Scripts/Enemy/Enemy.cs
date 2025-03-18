@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Basic  = 0,
+    Basic = 0,
     Target = 1,
     Follow = 2,
 }
@@ -12,41 +12,51 @@ public class Enemy : MonoBehaviour
 {
     [Header("적 타입")]
     public EnemyType EnemyType;
-    
+
     public float Speed = 5f;
     public int Health = 100;
     public int Damage = 40;
 
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
-    
+
     private Animator _animator;
 
     public GameObject[] ItemPrefabs;
     public GameObject ExplosionVFXPrefab;
-    
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
-    
-    
+
+
     private void Start()
     {
         switch (EnemyType)
         {
             case EnemyType.Basic:
-            {
-                _direction = Vector2.down;
-                break;
-            }
+                {
+                    _direction = Vector2.down;
+                    break;
+                }
 
             case EnemyType.Target:
-            {
-                SetDirection();
-                break;
-            }
-                
+                {
+                    SetDirection();
+                    break;
+                }
+
+        }
+    }
+
+    private void OnDestroy()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null)
+        {
+            AudioManager.Instance.PlaySFX(audioSource.clip);
         }
     }
 
@@ -57,18 +67,18 @@ public class Enemy : MonoBehaviour
         {
             _player = GameObject.FindGameObjectWithTag("Player");
         }
-        
+
         // 방향을 구한다. (target - me)
         _direction = _player.transform.position - this.transform.position;
         _direction.Normalize(); // 정규화
-        
+
         float radian = Mathf.Atan2(_direction.y, _direction.x);
         // radian = Mathf.Atan(_direction.y / _direction.x);
         float angle = Mathf.Rad2Deg * radian + 90;
         transform.eulerAngles = new Vector3(0, 0, angle);
     }
-    
-    
+
+
 
     // 매프레임마다 자동으로 호출되는 함수
     private void Update()
@@ -78,7 +88,7 @@ public class Enemy : MonoBehaviour
         {
             SetDirection();
         }
-        
+
         //transform.Translate(_direction * Speed * Time.deltaTime);
         // Translate 조향이 필요할 때 쓰는게 좋다.
         transform.position += (Vector3)_direction * Speed * Time.deltaTime;
@@ -104,13 +114,13 @@ public class Enemy : MonoBehaviour
         // 폭발 이펙트를 생성
         GameObject vfx = Instantiate(ExplosionVFXPrefab);
         vfx.transform.position = this.transform.position;
-        
+
         // 플레이어 붐에게 나 죽었음을 알린다.
         if (damage.Type == DamageType.Bullet)
         {
             GameObject.FindWithTag("Player").GetComponent<PlayerBoom>().AddKillCount();
         }
-        
+
         // 30% 확률로
         if (Random.Range(0f, 1f) < 0.3f)
         {
@@ -120,9 +130,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
-    
-    
+
+
+
     // 충돌 이벤트 함수
     // - Trigger 이벤트    : 물리 연산을 무시하지만, 충돌 이벤트를 받겠다.
     // - Collision 이벤트  : 물리 연산도 하고, 충돌 이벤트도 받겠다.
@@ -132,9 +142,9 @@ public class Enemy : MonoBehaviour
     // 다른 콜라이더와 충돌이 일어났을때 자동으로 호출되는 함수
     private void OnTriggerEnter2D(Collider2D other)   // Stay(충돌중), Exit(충돌끝)
     {
-        
+
         // 플레이어와 충돌:
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             // 플레이어 체력이 0 이하일때만 죽인다.
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.

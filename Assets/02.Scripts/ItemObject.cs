@@ -16,7 +16,7 @@ public class ItemObject : MonoBehaviour
     public ItemType ItemType;
 
     public float MoveSpeed = 2f;
-    
+
     public float Value;
 
     // 시간을 체크할 타이머
@@ -46,7 +46,7 @@ public class ItemObject : MonoBehaviour
     private float _percent = 0f;
 
     private Vector2 _controlVector = Vector2.zero;
-    
+
     private bool _isMoving = false;
     private float _duration = 0;
     private void Update()
@@ -62,11 +62,11 @@ public class ItemObject : MonoBehaviour
         {
             if (_controlVector == Vector2.zero)
             {
-                _controlVector =  transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                _controlVector = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             }
 
             _percent += Time.deltaTime / _duration;
-            
+
             transform.position = Bezier(transform.position, _controlVector, _player.transform.position, _percent);
         }
         else
@@ -76,6 +76,16 @@ public class ItemObject : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null)
+        {
+            AudioManager.Instance.PlaySFX(audioSource.clip);
         }
     }
 
@@ -94,11 +104,11 @@ public class ItemObject : MonoBehaviour
 
         Vector2 p1 = Vector2.Lerp(start, center, t);
         Vector2 p2 = Vector2.Lerp(center, end, t);
-        Vector2 final =  Vector2.Lerp(p1, p2, t);
+        Vector2 final = Vector2.Lerp(p1, p2, t);
         return final;
     }
-    
-    
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("상위: OnTriggerEnter2D");
@@ -106,7 +116,7 @@ public class ItemObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.otherCollider);    
+        Debug.Log(collision.otherCollider);
     }
 
 
@@ -114,7 +124,7 @@ public class ItemObject : MonoBehaviour
     {
         Debug.Log("상위: OnTriggerExit2D");
     }
-    
+
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -132,26 +142,26 @@ public class ItemObject : MonoBehaviour
             switch (ItemType)
             {
                 case ItemType.HealthUp:
-                {
-                    player.Health += (int)Value; // 프로퍼티, 메서드 처리
-                    // 설계는 best가 없다. better가 있다.
-                    break;
-                }
+                    {
+                        player.Health += (int)Value; // 프로퍼티, 메서드 처리
+                                                     // 설계는 best가 없다. better가 있다.
+                        break;
+                    }
 
                 case ItemType.AttackSpeedUp:
-                {
-                    player.AttackCooltime += Value;
-                    break;
-                }
+                    {
+                        player.AttackCooltime += Value;
+                        break;
+                    }
 
                 case ItemType.MoveSpeedUp:
-                {
-                    player.MoveSpeed += Value;
-                    break;
-                }
+                    {
+                        player.MoveSpeed += Value;
+                        break;
+                    }
             }
-            
-            Destroy(gameObject);  
+
+            Destroy(gameObject);
         }
     }
 }

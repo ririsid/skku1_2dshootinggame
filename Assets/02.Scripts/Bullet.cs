@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         // 총알 타입에 따라 대미지를 다르게한다.
-        switch(BulletType)
+        switch (BulletType)
         {
             case BulletType.Main:
                 Damage = 100;
@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
                 Value = Damage,
                 Type = DamageType.Bullet,
             };
-            
+
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
 
