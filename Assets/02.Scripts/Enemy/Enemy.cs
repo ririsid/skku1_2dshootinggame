@@ -7,6 +7,7 @@ public enum EnemyType
     Follow = 2,
 }
 
+
 public class Enemy : MonoBehaviour
 {
     [Header("적 타입")]
@@ -103,6 +104,9 @@ public class Enemy : MonoBehaviour
         // 폭발 이펙트를 생성
         GameObject vfx = Instantiate(ExplosionVFXPrefab);
         vfx.transform.position = this.transform.position;
+        
+        // 플레이어 붐에게 나 죽었음을 알린다.
+        GameObject.FindWithTag("Player").GetComponent<PlayerBoom>().AddKillCount();
         
         // 30% 확률로
         if (Random.Range(0f, 1f) < 0.3f)
