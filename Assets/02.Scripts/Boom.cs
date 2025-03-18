@@ -5,12 +5,21 @@ public class Boom : MonoBehaviour
 {
     private float _timer = 0;
     private const float SHOW_TIME = 2f;
-    
+
+    private CameraShake _cameraShake;
+
+    private void Awake()
+    {
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
+    }
+
     public void Show()
     {
         gameObject.SetActive(true);
 
         _timer = 0f;
+
+        _cameraShake.Shake();
     }
 
     // 활성화 되어있을 경우 매 프레임마다 호출되는 이벤트 함수
@@ -22,13 +31,13 @@ public class Boom : MonoBehaviour
             Hide();
         }
     }
-    
+
     public void Hide()
     {
         gameObject.SetActive(false);
     }
-    
-    
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))

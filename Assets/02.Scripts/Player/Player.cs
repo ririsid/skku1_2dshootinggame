@@ -17,13 +17,13 @@ public class Player : MonoBehaviour
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
 
-    private CameraShake cameraShake;
+    private CameraShake _cameraShake;
 
     public void TakeDamage(int damage)
     {
         Health -= (int)(damage * Defence);
 
-        cameraShake.Shake();
+        _cameraShake.Shake();
 
         if (Health <= 0)
         {
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        cameraShake = Camera.main.GetComponent<CameraShake>();
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     private void Update()
