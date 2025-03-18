@@ -51,11 +51,8 @@ public class ItemObject : MonoBehaviour
     private bool _isMoving = false;
     private float _duration = 0;
 
-    private bool _isMagnetized = false;
-    public bool IsMagnetized
-    {
-        get; set;
-    }
+    public bool IsMagnetized { get; set; }
+
     private Vector2 _direction;
 
     private void Update()
@@ -67,7 +64,7 @@ public class ItemObject : MonoBehaviour
             _duration = distance / MoveSpeed; // 10/2 -> 5
         }
 
-        if (_isMagnetized)
+        if (IsMagnetized)
         {
             _direction = _player.transform.position - this.transform.position;
             _direction.Normalize();
