@@ -9,16 +9,15 @@ public class Background : MonoBehaviour
     // - 머터리얼
     public SpriteRenderer MySpriteRenderer;
     private Material _material;
+    private MaterialPropertyBlock _materialPropertyBlock;
+    private Vector2 _currentOffset = Vector2.zero;
     
-    // - 스크롤 속도
     public float ScrollSpeed = 1f;
 
     private void Awake()
     {
         MySpriteRenderer = GetComponent<SpriteRenderer>();
-        _material = MySpriteRenderer.material; // 원본 머터리얼의 복사본 (인스턴스)를 생성해서 반환
-                                               // vs sharedMaterial
-        MySpriteRenderer.material = _material;
+        _materialPropertyBlock = new MaterialPropertyBlock();
     }
     
     void Update()
@@ -27,6 +26,9 @@ public class Background : MonoBehaviour
         Vector2 direction = Vector2.up;
 
         // 방향으로 스크롤링 한다.
-        _material.mainTextureOffset += direction * ScrollSpeed * Time.deltaTime;
+        _currentOffset += new Vector2(0, ScrollSpeed * Time.deltaTime);
+        MySpriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+        _materialPropertyBlock.SetVector("_MainTex_ST", new Vector4(1, 1, _currentOffset.x, _currentOffset.y));
+        MySpriteRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
 }

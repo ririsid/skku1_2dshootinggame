@@ -12,5 +12,5 @@ public struct Damage       // 값 타입, 구조체: 다양한 데이터를 담�
 {
     public int Value;
     public DamageType Type;
-    public GameObject From;
+    public GameObject From; 
 }
