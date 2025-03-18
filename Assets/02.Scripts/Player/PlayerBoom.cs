@@ -17,6 +17,7 @@ public class PlayerBoom : MonoBehaviour
         _killCount++;
         if (_killCount >= ADD_COUNT)
         {
+            _killCount = 0;
             _boomCount = Math.Min(_boomCount + 1, MAX_COUNT);
         }
     }
