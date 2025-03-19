@@ -379,6 +379,7 @@ MonoBehaviour:
   MoveSpeed: 3
   AttackCooltime: 0.6
   Defence: 0.2
+  GameUI: {fileID: 819845204}
   PlayMode: 1
   GameUI: {fileID: 283777669}
 --- !u!95 &74543906

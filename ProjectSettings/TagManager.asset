@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Bullet
-  - Enemy
-  - FxTemporaire
-  - Item
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - DestroyZone
+  - 
   - 
   - 
   - 
@@ -44,9 +40,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UI
-    uniqueID: 3907139911
     locked: 0
   m_RenderingLayers:
   - Default

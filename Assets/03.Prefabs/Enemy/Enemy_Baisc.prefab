@@ -109,6 +109,7 @@ MonoBehaviour:
   Speed: 5
   Health: 100
   Damage: 40
+  Score: 10
   ItemPrefabs:
   - {fileID: 9120490128172919261, guid: feb9c676ca5e01247ab0146ddf113423, type: 3}
   - {fileID: 185569316825520367, guid: 7275a97d060e83748a27b1c19a3d9a50, type: 3}
