@@ -98,28 +98,8 @@ public class ItemObject : MonoBehaviour
         return final;
     }
     
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("상위: OnTriggerEnter2D");
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.otherCollider);    
-    }
-
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Debug.Log("상위: OnTriggerExit2D");
-    }
-    
-
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("상위: OnTriggerStay2D");
-
         if (other.CompareTag("Player"))
         {
             _timer += Time.deltaTime;

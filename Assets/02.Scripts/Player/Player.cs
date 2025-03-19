@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public class PlayerData
+{
+    public int Score = 0;
+    public int KillCount = 0;
+    public int BoomCount = 0;
+}
+
 public class Player : MonoBehaviour
 {
     // "응집도"는 높히고! "결합도"는 낮춰라
@@ -15,7 +22,7 @@ public class Player : MonoBehaviour
     public float Defence = 0.2f;
 
     public UI_Game GameUI;
-    private int _score = 0;
+
     
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
@@ -23,8 +30,27 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        GameUI.RefreshScore(0);
+        Load();
+        GameUI.RefreshScore(_score);
     }
+    
+    private void Save()
+    {
+        // PlayerPrefs: 값을 키(Key)와 값(Value) 형태로 저장하는 클래스
+        // 저장할 수 있는 자료형은 int, float, string입니다.
+        
+        // 각각 쌍으로 저장(Set), 불러오기(Get)함수가 있다.
+        
+        PlayerPrefs.SetInt("Score", _score);
+        PlayerPrefs.SetInt("Boom", _score);
+        PlayerPrefs.SetInt("KIllCount", _score);
+    }
+
+    private void Load()
+    {
+        _score = PlayerPrefs.GetInt("Score", 0);
+    }
+    
 
     // 플레이어 vs 관리자 vs UI
     public void AddScore(int score)
@@ -32,6 +58,8 @@ public class Player : MonoBehaviour
         _score += score;
         
         GameUI.RefreshScore(_score);
+
+        Save();
     }
     
     public void TakeDamage(int damage)
