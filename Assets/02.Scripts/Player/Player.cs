@@ -27,15 +27,20 @@ public class Player : MonoBehaviour
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
 
-    private int _score = 0;
+    private PlayerData MyData = new PlayerData();
+    public bool HasBoom => MyData.BoomCount > 0;
 
     private CameraShake _cameraShake;
 
+    private const int MAX_COUNT = 3;
+    private const int ADD_COUNT = 20;
+
     private void Start()
     {
-        Load();
-        GameUI.RefreshScore(_score);
         _cameraShake = Camera.main.GetComponent<CameraShake>();
+        Load();
+        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
+        GameUI.RefreshScore(MyData.Score);
     }
 
     private void Save()
@@ -45,22 +50,48 @@ public class Player : MonoBehaviour
 
         // 각각 쌍으로 저장(Set), 불러오기(Get)함수가 있다.
 
-        PlayerPrefs.SetInt("Score", _score);
-        PlayerPrefs.SetInt("Boom", _score);
-        PlayerPrefs.SetInt("KIllCount", _score);
+        string data = JsonUtility.ToJson(MyData);
+        PlayerPrefs.SetString("PlayerData", data);
     }
 
     private void Load()
     {
-        _score = PlayerPrefs.GetInt("Score", 0);
+        string jsonString = PlayerPrefs.GetString("PlayerData");
+        if (string.IsNullOrEmpty(jsonString) == false)
+        {
+            MyData = JsonUtility.FromJson<PlayerData>(jsonString);
+        }
     }
-
 
     public void AddScore(int score)
     {
-        _score += score;
+        MyData.Score += score;
 
-        GameUI.RefreshScore(_score);
+        GameUI.RefreshScore(MyData.Score);
+
+        Save();
+    }
+
+    public void AddKillCount()
+    {
+        MyData.KillCount++;
+
+        if (MyData.KillCount >= ADD_COUNT)
+        {
+            MyData.KillCount = 0;
+            MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
+        }
+
+        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
+
+        Save();
+    }
+
+    public void SubstractBoomCount()
+    {
+        MyData.BoomCount -= 1;
+
+        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
 
         Save();
     }

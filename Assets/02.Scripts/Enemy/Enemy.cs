@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
         if (damage.Type == DamageType.Bullet)
         {
             GameObject player = GameObject.FindWithTag("Player");
-            player.GetComponent<PlayerBoom>().AddKillCount();
+            player.GetComponent<Player>().AddKillCount();
             player.GetComponent<Player>().AddScore(Score);
         }
 

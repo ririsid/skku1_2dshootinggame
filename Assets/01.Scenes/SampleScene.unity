@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 74543903}
   - component: {fileID: 74543904}
   - component: {fileID: 74543906}
+  - component: {fileID: 74543908}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -378,9 +379,8 @@ MonoBehaviour:
   MoveSpeed: 3
   AttackCooltime: 0.6
   Defence: 0.2
-  GameUI: {fileID: 819845204}
-  PlayMode: 1
   GameUI: {fileID: 283777669}
+  PlayMode: 1
 --- !u!95 &74543906
 Animator:
   serializedVersion: 7
@@ -765,7 +765,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -387827385
+  m_SortingLayerID: -1131713863
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &283777668
@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000004739e2e8
+  m_ApplyToSortingLayers: 000000004739e2e8b96a8bbc
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
