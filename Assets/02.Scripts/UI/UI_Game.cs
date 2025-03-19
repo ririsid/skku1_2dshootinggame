@@ -14,6 +14,13 @@ public class UI_Game : MonoBehaviour
     // - 킬 카운트 UI
     public TextMeshProUGUI KillText;
 
+    public TextMeshProUGUI ScoreText;
+
+
+    // 스마트 UI -> UI는 말 그대로 사용자와 게임간의 인터랙티브한 요소를 보여주는 책임만 가져야지
+    //          -> 그 외 데이터와 데이터를 다루는 로직이 들어가면 책임이 커져서 UI 범위를 벗어난다.
+    
+    
     // 기능: 새로고침
     public void Refresh(int boomCount, int killCount)
     {
@@ -25,5 +32,11 @@ public class UI_Game : MonoBehaviour
 
         // 킬 횟수 텍스트 새로고침
         KillText.text = $"Kills: {killCount}";
+    }
+
+    public void RefreshScore(int score)
+    { 
+        // 문자열 포맷
+        ScoreText.text = score.ToString("N0");
     }
 }

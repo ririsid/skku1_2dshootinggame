@@ -13,9 +13,26 @@ public class Player : MonoBehaviour
     public float AttackCooltime  = 0.6f;
 
     public float Defence = 0.2f;
+
+    public UI_Game GameUI;
+    private int _score = 0;
     
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
+
+
+    private void Start()
+    {
+        GameUI.RefreshScore(0);
+    }
+
+    // 플레이어 vs 관리자 vs UI
+    public void AddScore(int score)
+    {
+        _score += score;
+        
+        GameUI.RefreshScore(_score);
+    }
     
     public void TakeDamage(int damage)
     {

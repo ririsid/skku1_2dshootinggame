@@ -16,7 +16,8 @@ public class Enemy : MonoBehaviour
     public float Speed = 5f;
     public int Health = 100;
     public int Damage = 40;
-
+    public int Score = 0;
+    
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
     
@@ -105,10 +106,12 @@ public class Enemy : MonoBehaviour
         GameObject vfx = Instantiate(ExplosionVFXPrefab);
         vfx.transform.position = this.transform.position;
         
-        // 플레이어 붐에게 나 죽었음을 알린다.
+        // 플레이어(붐)에게 나 죽었음을 알린다.
         if (damage.Type == DamageType.Bullet)
         {
-            GameObject.FindWithTag("Player").GetComponent<PlayerBoom>().AddKillCount();
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<PlayerBoom>().AddKillCount();
+            player.GetComponent<Player>().AddScore(Score);
         }
         
         // 30% 확률로
