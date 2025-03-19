@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro; // 텍스트 메시 프로는 현재 유니티에서 기본으로 쓰고있는 텍스트 컴포넌트
 
 
@@ -38,5 +39,18 @@ public class UI_Game : MonoBehaviour
     { 
         // 문자열 포맷
         ScoreText.text = score.ToString("N0");
+        ScoreText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.2f)
+            .SetEase(Ease.OutBounce)
+            //.SetLoops(-1, LoopType.Yoyo)
+            .OnComplete(() =>
+        {
+            // 람다식
+            ScoreText.rectTransform.localScale = Vector3.one;
+        });
+
+        // 구현 방법:
+        // 애니메이션
+        // 딜레이와 +보간 주는 로직
+        // dotween 사용
     }
 }
