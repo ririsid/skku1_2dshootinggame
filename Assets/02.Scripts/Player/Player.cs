@@ -104,8 +104,14 @@ public class Player : MonoBehaviour
 
         if (Health <= 0)
         {
+            ResetData();
             Destroy(this.gameObject);
         }
+    }
+
+    private void ResetData()
+    {
+        PlayerPrefs.DeleteKey("PlayerData");
     }
 
     public void EatAllItems()
