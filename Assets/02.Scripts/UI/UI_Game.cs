@@ -33,10 +33,9 @@ public class UI_Game : MonoBehaviour
     {
         // 문자열 포멧
         ScoreText.text = score.ToString("N0");
-        ScoreText.rectTransform.DOScale(new Vector3(1.4f, 1.4f, 1.2f), 0.2f)
-        .SetEase(Ease.OutBounce)
-        // .SetLoops(1, LoopType.Yoyo);
-        .OnComplete(() =>
+        DOTween.KillAll(true);
+        ScoreText.rectTransform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f)
+            .OnComplete(() =>
         {
             // 람다식
             ScoreText.rectTransform.localScale = Vector3.one;
