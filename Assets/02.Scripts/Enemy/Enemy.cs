@@ -119,9 +119,9 @@ public class Enemy : MonoBehaviour
         // 플레이어 붐에게 나 죽었음을 알린다.
         if (damage.Type == DamageType.Bullet)
         {
-            PlayerBoom playerBoom = GameObject.FindWithTag("Player").GetComponent<PlayerBoom>();
-            playerBoom.AddKillCount();
-            playerBoom.AddScore(Score);
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponent<PlayerBoom>().AddKillCount();
+            player.GetComponent<Player>().AddScore(Score);
         }
 
         // 30% 확률로

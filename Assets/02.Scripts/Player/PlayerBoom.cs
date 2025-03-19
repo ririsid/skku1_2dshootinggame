@@ -15,11 +15,13 @@ public class PlayerBoom : MonoBehaviour
 
     private int _killCount = 0;
 
-    private int _score = 0;
-
     public void AddKillCount()
     {
         _killCount++;
+
+        // 게임 UI를 새로고침 한다.
+        GameUI.Refresh(_boomCount, _killCount);
+
         if (_killCount >= ADD_COUNT)
         {
             _killCount = 0;
@@ -27,18 +29,10 @@ public class PlayerBoom : MonoBehaviour
         }
     }
 
-    public void AddScore(int score)
-    {
-        _score += score;
-
-        // 게임 UI를 새로고침 한다.
-        GameUI.Refresh(_boomCount, _killCount, _score);
-    }
-
     private void Start()
     {
         // 게임 UI를 새로고침 한다.
-        GameUI.Refresh(_boomCount, _killCount, _score);
+        GameUI.Refresh(_boomCount, _killCount);
     }
 
     private void Update()
@@ -54,7 +48,7 @@ public class PlayerBoom : MonoBehaviour
             _boom.Show();
 
             // 게임 UI를 새로고침 한다.
-            GameUI.Refresh(_boomCount, _killCount, _score);
+            GameUI.Refresh(_boomCount, _killCount);
         }
     }
 }

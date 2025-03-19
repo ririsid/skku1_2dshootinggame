@@ -17,7 +17,17 @@ public class Player : MonoBehaviour
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
 
+    public UI_Game GameUI;
+    private int _score = 0;
+
     private CameraShake _cameraShake;
+
+    public void AddScore(int score)
+    {
+        _score += score;
+
+        GameUI.RefreshScore(_score);
+    }
 
     public void TakeDamage(int damage)
     {
