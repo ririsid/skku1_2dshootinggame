@@ -15,9 +15,7 @@ public class Player : MonoBehaviour
     public float AttackCooltime  = 0.6f;
 
     public float Defence = 0.2f;
-
-    public UI_Game GameUI;
-
+    
     
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Mannual;
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
     {
         Load();
         
-        GameUI.RefreshScore(PlayerData.Score);
+        UI_Game.Instance.RefreshScore(PlayerData.Score);
     }
     
     private void Save()
@@ -61,7 +59,7 @@ public class Player : MonoBehaviour
     {
         PlayerData.Score += score;
 
-        GameUI.RefreshScore(PlayerData.Score);
+        UI_Game.Instance.RefreshScore(PlayerData.Score);
 
         Save();
     }
