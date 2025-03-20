@@ -51,12 +51,12 @@ public class Player : MonoBehaviour
         // 각각 쌍으로 저장(Set), 불러오기(Get)함수가 있다.
 
         string data = JsonUtility.ToJson(MyData);
-        PlayerPrefs.SetString("PlayerData", data);
+        SecurePlayerPrefs.SetString("PlayerData", data);
     }
 
     private void Load()
     {
-        string jsonString = PlayerPrefs.GetString("PlayerData");
+        string jsonString = SecurePlayerPrefs.GetString("PlayerData");
         if (string.IsNullOrEmpty(jsonString) == false)
         {
             MyData = JsonUtility.FromJson<PlayerData>(jsonString);
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 
     private void ResetData()
     {
-        PlayerPrefs.DeleteKey("PlayerData");
+        SecurePlayerPrefs.DeleteKey("PlayerData");
     }
 
     public void EatAllItems()
