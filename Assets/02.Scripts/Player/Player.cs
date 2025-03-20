@@ -1,12 +1,5 @@
 using UnityEngine;
 
-public class PlayerData
-{
-    public int Score = 0;
-    public int KillCount = 0;
-    public int BoomCount = 0;
-}
-
 public class Player : MonoBehaviour
 {
     // "응집도"는 높히고! "결합도"는 낮춰라
@@ -19,13 +12,13 @@ public class Player : MonoBehaviour
     public float MoveSpeed = 3f;
     public float AttackCooltime = 0.6f;
 
-    public float Defence = 0.2f;
+    public float Defense = 0.2f;
 
     public UI_Game GameUI;
 
 
     // - 모드(자동, 수동)
-    public PlayMode PlayMode = PlayMode.Mannual;
+    public PlayMode PlayMode = PlayMode.Manual;
 
     private PlayerData MyData = new PlayerData();
     public bool HasBoom => MyData.BoomCount > 0;
@@ -98,7 +91,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Health -= (int)(damage * Defence);
+        Health -= (int)(damage * Defense);
 
         _cameraShake.Shake();
 
@@ -132,7 +125,7 @@ public class Player : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayMode = PlayMode.Mannual;
+            PlayMode = PlayMode.Manual;
         }
     }
 }

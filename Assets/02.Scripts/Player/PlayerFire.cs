@@ -3,20 +3,18 @@ using UnityEngine;
 public enum PlayMode
 {
     Auto,
-    Mannual
+    Manual
 }
 
-public class PlayerFire : MonoBehaviour
+public class PlayerFire : PlayerComponent
 {
     // 목표: 총알을 만들어서 발사하고 싶다.
 
-    public Player MyPlayer;
-    
     // 필요 속성:
     // - 총알 프리팹
     public GameObject BulletPrefab;
     public GameObject SubBulletPrefab;
-    
+
     // - 총구들
     public GameObject[] Muzzles;
     public GameObject[] SubMuzzles;
@@ -27,21 +25,20 @@ public class PlayerFire : MonoBehaviour
 
 
 
-    
     // 필요 기능:
     // - 발사하다.
     private void Update()
     {
         Cooltimer -= Time.deltaTime;
-        
+
         // 쿨타임이 아직 안됐으면 종료
-        if(Cooltimer > 0 )
+        if (Cooltimer > 0)
         {
             return;
         }
 
         // 자동 모드 이거나 "Fire1" 버튼이 입력되면..
-        if (MyPlayer.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
+        if (_player.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
         {
             foreach (GameObject muzzle in Muzzles)
             {
@@ -57,7 +54,7 @@ public class PlayerFire : MonoBehaviour
                 subBullet.transform.position = subMuzzle.transform.position;
             }
 
-            Cooltimer = MyPlayer.AttackCooltime;
+            Cooltimer = _player.AttackCooltime;
         }
     }
 

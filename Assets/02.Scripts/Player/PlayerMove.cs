@@ -1,14 +1,12 @@
 using System;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : PlayerComponent
 {
     // MonoBehaviour: 여러 가지 이벤트 함수를 자동으로 호출해주는 기능
     // Component: 게임 오브젝트에 추가할 수 있는 여러 가지 기능
 
     // 최종 목표: 키보드 입력에 따라 플레이어를 이동시키고 싶다.
-
-    public Player MyPlayer;
 
 
     public float MinX, MaxX;
@@ -28,16 +26,17 @@ public class PlayerMove : MonoBehaviour
     private const float DETACTION_RANGE = 6;
 
     // Start 보다 먼저 호출되며 프리팹이 인스턴스화 된 직후 호출
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         MyAnimator = GetComponent<Animator>();
     }
-    
+
     private void Update()
     {
         SpeedCheck();
 
-        if (MyPlayer.PlayMode == PlayMode.Auto)
+        if (_player.PlayMode == PlayMode.Auto)
         {
             AutoMove();
         }
@@ -54,17 +53,17 @@ public class PlayerMove : MonoBehaviour
 
         // 적이 없다면 아무고또 안한다.
         if (_target == null) return;
-        
+
         // _target을 이용해서 이동 코드 작성
         Vector2 direction = _target.transform.position - transform.position;
         float distance = direction.magnitude;
-        
+
         // 달달달거리지 않게
         if (Mathf.Abs(direction.x) <= THRESHOLD)
         {
             direction.x = 0;
         }
-        
+
         PlayAnimation(direction);
 
         // 멀면 앞으로 가까우면 뒤로
@@ -81,14 +80,14 @@ public class PlayerMove : MonoBehaviour
             direction.y = -1;
         }
 
-        
-        
-        
+
+
+
         direction.Normalize();
-        
-        
+
+
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * _player.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -112,10 +111,10 @@ public class PlayerMove : MonoBehaviour
     {
         // 이미 타겟이 있으면 아무것도 안한다.
         if (_target != null) return;
-        
+
         // 모든 적을 찾는다.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        
+
         // 가장 나와 거리가 짧은 적 찾기
         float distance = Mathf.Infinity;
         foreach (GameObject enemy in enemies)
@@ -128,11 +127,11 @@ public class PlayerMove : MonoBehaviour
                 distance = targetDistance;
                 _target = enemy;
             }
-        
+
         }
     }
-    
-    
+
+
     private void ManualMove()
     {
         float h = Input.GetAxisRaw("Horizontal"); // 수평 키 : -1, 0, 1
@@ -146,7 +145,7 @@ public class PlayerMove : MonoBehaviour
 
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * _player.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -171,11 +170,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // 매직넘버로 해도 되는 숫자: -1, 0, 1
-            MyPlayer.MoveSpeed += Math.Min(10, MyPlayer.MoveSpeed + 1);
+            _player.MoveSpeed += Math.Min(10, _player.MoveSpeed + 1);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            MyPlayer.MoveSpeed = Math.Max(1, MyPlayer.MoveSpeed - 1);
+            _player.MoveSpeed = Math.Max(1, _player.MoveSpeed - 1);
         }
     }
 
@@ -195,7 +194,7 @@ public class PlayerMove : MonoBehaviour
         {
             MyAnimator.Play("Player_Right");
         }*/
-        
+
         // 2. 상태 전이
         // -0.03 -> (int)-0.03 -> -1
         MyAnimator.SetInteger("x", direction.x < 0 ? -1 : direction.x > 0 ? 1 : 0);
