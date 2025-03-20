@@ -8,7 +8,6 @@ public class PlayerMove : PlayerComponent
 
     // 최종 목표: 키보드 입력에 따라 플레이어를 이동시키고 싶다.
 
-
     public float MinX, MaxX;
     public float MinY, MaxY;
 

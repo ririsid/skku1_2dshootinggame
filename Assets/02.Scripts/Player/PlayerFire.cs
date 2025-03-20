@@ -9,7 +9,6 @@ public enum PlayMode
 public class PlayerFire : PlayerComponent
 {
     // 목표: 총알을 만들어서 발사하고 싶다.
-
     // 필요 속성:
     // - 총알 프리팹
     public GameObject BulletPrefab;
