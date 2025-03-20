@@ -1,15 +1,12 @@
 using System;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : PlayerComponent
 {
     // MonoBehaviour: 여러 가지 이벤트 함수를 자동으로 호출해주는 기능
     // Component: 게임 오브젝트에 추가할 수 있는 여러 가지 기능
 
     // 최종 목표: 키보드 입력에 따라 플레이어를 이동시키고 싶다.
-
-    public Player MyPlayer;
-
 
     public float MinX, MaxX;
     public float MinY, MaxY;
@@ -28,8 +25,10 @@ public class PlayerMove : MonoBehaviour
     private const float DETACTION_RANGE = 6;
 
     // Start 보다 먼저 호출되며 프리팹이 인스턴스화 된 직후 호출
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         MyAnimator = GetComponent<Animator>();
     }
     
@@ -37,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     {
         SpeedCheck();
 
-        if (MyPlayer.PlayMode == PlayMode.Auto)
+        if (_player.PlayMode == PlayMode.Auto)
         {
             AutoMove();
         }
@@ -88,7 +87,7 @@ public class PlayerMove : MonoBehaviour
         
         
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * _player.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -146,7 +145,7 @@ public class PlayerMove : MonoBehaviour
 
 
         // 1. 새로운 위치 = 현재 위치 + 방향 * 속력 * 시간
-        Vector3 newPosition = transform.position + (Vector3)(direction * MyPlayer.MoveSpeed) * Time.deltaTime;
+        Vector3 newPosition = transform.position + (Vector3)(direction * _player.MoveSpeed) * Time.deltaTime;
 
         // 2. Math.Clamp(현재값, 최소값, 최대값)
         newPosition.y = Math.Clamp(newPosition.y, MinY, MaxY);
@@ -171,11 +170,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // 매직넘버로 해도 되는 숫자: -1, 0, 1
-            MyPlayer.MoveSpeed += Math.Min(10, MyPlayer.MoveSpeed + 1);
+            _player.MoveSpeed += Math.Min(10, _player.MoveSpeed + 1);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            MyPlayer.MoveSpeed = Math.Max(1, MyPlayer.MoveSpeed - 1);
+            _player.MoveSpeed = Math.Max(1, _player.MoveSpeed - 1);
         }
     }
 

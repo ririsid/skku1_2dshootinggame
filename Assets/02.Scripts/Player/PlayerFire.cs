@@ -6,11 +6,9 @@ public enum PlayMode
     Mannual
 }
 
-public class PlayerFire : MonoBehaviour
+public class PlayerFire : PlayerComponent
 {
     // 목표: 총알을 만들어서 발사하고 싶다.
-
-    public Player MyPlayer;
     
     // 필요 속성:
     // - 총알 프리팹
@@ -41,7 +39,7 @@ public class PlayerFire : MonoBehaviour
         }
 
         // 자동 모드 이거나 "Fire1" 버튼이 입력되면..
-        if (MyPlayer.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
+        if (_player.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
         {
             foreach (GameObject muzzle in Muzzles)
             {
@@ -57,7 +55,7 @@ public class PlayerFire : MonoBehaviour
                 subBullet.transform.position = subMuzzle.transform.position;
             }
 
-            Cooltimer = MyPlayer.AttackCooltime;
+            Cooltimer = _player.AttackCooltime;
         }
     }
 
