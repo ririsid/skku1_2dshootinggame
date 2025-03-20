@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -25,6 +26,12 @@ public class Player : MonoBehaviour
 
     private const int MAX_COUNT = 3;
     private const int ADD_COUNT = 20;
+    private const int BOSS_SPAWN_COUNT = 100;
+
+    private int _killCountForBoom
+    {
+        get => MyData.KillCount % ADD_COUNT;
+    }
 
     private void Start()
     {
@@ -32,6 +39,7 @@ public class Player : MonoBehaviour
         Load();
         UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
         UI_Game.Instance.RefreshScore(MyData.Score);
+        BossSpawner.Instance.Spawn();
     }
 
     private void Save()
@@ -67,18 +75,20 @@ public class Player : MonoBehaviour
     {
         MyData.KillCount++;
 
-        if (MyData.KillCount >= ADD_COUNT)
+        if (MyData.KillCount > 0 && _killCountForBoom == 0)
         {
-            MyData.KillCount = 0;
             MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
         }
-
+        if (MyData.KillCount > 0 && MyData.KillCount % BOSS_SPAWN_COUNT == 0)
+        {
+            BossSpawner.Instance.Spawn();
+        }
         UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
 
         Save();
     }
 
-    public void SubstractBoomCount()
+    public void SubtractBoomCount()
     {
         MyData.BoomCount -= 1;
 

@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd1cb9a7a5cc6c45b508d677c293142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPlayer: {fileID: 74543905}
   MinX: -2.5
   MaxX: 2.5
   MinY: -5.3
@@ -280,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8489bb8e301d02846aa7b63101e86846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPlayer: {fileID: 74543905}
   BulletPrefab: {fileID: 1182273936020812354, guid: 927034504db58274eb4cbd4029d4afce, type: 3}
   SubBulletPrefab: {fileID: 5069529581313124235, guid: c9265193640858c49a3c23f5cb5e6f7c, type: 3}
   Muzzles:
@@ -324,7 +322,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0008017719, y: -0.06316292}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -334,7 +332,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.4172929, y: 0.37792468}
   m_EdgeRadius: 0
 --- !u!50 &74543904
 Rigidbody2D:
@@ -378,8 +376,7 @@ MonoBehaviour:
   Health: 100
   MoveSpeed: 3
   AttackCooltime: 0.6
-  Defence: 0.2
-  GameUI: {fileID: 283777669}
+  Defense: 0.2
   PlayMode: 1
 --- !u!95 &74543906
 Animator:
@@ -416,7 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boom: {fileID: 1851918955}
-  GameUI: {fileID: 283777669}
 --- !u!96 &74543908
 TrailRenderer:
   serializedVersion: 3
@@ -2213,7 +2209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1685104110
 Transform:
   m_ObjectHideFlags: 0
@@ -2525,6 +2521,52 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1890354452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890354454}
+  - component: {fileID: 1890354453}
+  m_Layer: 0
+  m_Name: BossSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1890354453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890354452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6a19ca7b0e4b343bf9a8c5a191dee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BossPrefabs:
+  - {fileID: 2917420210104248268, guid: 261f03159630b634097f9a217ef1d6ee, type: 3}
+--- !u!4 &1890354454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890354452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896885424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,3 +3073,4 @@ SceneRoots:
   - {fileID: 1685104110}
   - {fileID: 283777668}
   - {fileID: 906509142}
+  - {fileID: 1890354454}

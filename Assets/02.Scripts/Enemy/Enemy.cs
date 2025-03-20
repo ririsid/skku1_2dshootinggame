@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum EnemyType
 {
     Basic = 0,
     Target = 1,
     Follow = 2,
+    Boss = 3,
 }
 
 
@@ -53,6 +55,8 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!SceneManager.GetActiveScene().isLoaded) return;
+
         AudioSource audioSource = GetComponent<AudioSource>();
 
         if (audioSource != null)
@@ -122,6 +126,10 @@ public class Enemy : MonoBehaviour
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<Player>().AddKillCount();
             player.GetComponent<Player>().AddScore(Score);
+            if (EnemyType == EnemyType.Boss)
+            {
+                BossSpawner.Instance.RemoveBoss();
+            }
         }
 
         // 30% 확률로

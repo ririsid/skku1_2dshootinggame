@@ -16,7 +16,7 @@ public class PlayerBoom : PlayerComponent
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            _player.SubstractBoomCount();
+            _player.SubtractBoomCount();
             _boom.Show();
         }
     }

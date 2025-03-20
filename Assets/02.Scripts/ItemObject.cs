@@ -1,6 +1,7 @@
 using System;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 
@@ -93,6 +94,8 @@ public class ItemObject : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!SceneManager.GetActiveScene().isLoaded) return;
+
         AudioSource audioSource = GetComponent<AudioSource>();
 
         if (audioSource != null)
