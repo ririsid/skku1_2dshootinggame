@@ -6,8 +6,6 @@ public class PlayerBoom : PlayerComponent
 {
     public Boom _boom;
 
-    public UI_Game GameUI;
-
     private void Update()
     {
 

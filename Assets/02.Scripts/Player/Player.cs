@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
 
     public float Defense = 0.2f;
 
-    public UI_Game GameUI;
-
 
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Manual;
@@ -32,8 +30,8 @@ public class Player : MonoBehaviour
     {
         _cameraShake = Camera.main.GetComponent<CameraShake>();
         Load();
-        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
-        GameUI.RefreshScore(MyData.Score);
+        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
+        UI_Game.Instance.RefreshScore(MyData.Score);
     }
 
     private void Save()
@@ -60,7 +58,7 @@ public class Player : MonoBehaviour
     {
         MyData.Score += score;
 
-        GameUI.RefreshScore(MyData.Score);
+        UI_Game.Instance.RefreshScore(MyData.Score);
 
         Save();
     }
@@ -75,7 +73,7 @@ public class Player : MonoBehaviour
             MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
         }
 
-        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
+        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
 
         Save();
     }
@@ -84,7 +82,7 @@ public class Player : MonoBehaviour
     {
         MyData.BoomCount -= 1;
 
-        GameUI.Refresh(MyData.BoomCount, MyData.KillCount);
+        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
 
         Save();
     }

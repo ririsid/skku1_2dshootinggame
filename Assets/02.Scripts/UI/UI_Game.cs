@@ -5,6 +5,20 @@ using DG.Tweening;
 
 public class UI_Game : MonoBehaviour
 {
+    public static UI_Game Instance = null;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     // 목적: 필살기 갯수, 킬 카운드 등 UI를 담당하고 싶다.
     // 속성:
     // - 필살기 갯수 UI
