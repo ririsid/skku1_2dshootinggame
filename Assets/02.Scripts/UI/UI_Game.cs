@@ -30,6 +30,9 @@ public class UI_Game : MonoBehaviour
     // - 점수 UI
     public TextMeshProUGUI ScoreText;
 
+    // - 경고 텍스트 UI
+    public TextMeshProUGUI WarningText;
+
     // 기능: 새로고침
     public void Refresh(int boomCount, int killCount)
     {
@@ -54,5 +57,18 @@ public class UI_Game : MonoBehaviour
             // 람다식
             ScoreText.rectTransform.localScale = Vector3.one;
         });
+    }
+
+    public void ShowWarningText()
+    {
+        WarningText.rectTransform.anchoredPosition = new Vector2(0, 700);
+        WarningText.gameObject.SetActive(true);
+        // 경고 텍스트를 2번 반복하면서 페이드 인/아웃하고,
+        WarningText.rectTransform.DOScale(1.2f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() =>
+        {
+            WarningText.rectTransform.DOAnchorPosY(WarningText.rectTransform.anchoredPosition.y + 400, 0.1f)
+            .OnComplete(() => WarningText.gameObject.SetActive(false));
+        });
+
     }
 }
