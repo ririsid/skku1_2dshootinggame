@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 3
   Speed: 1.5
-  Health: 10000
+  Health: 8000
   Damage: 100
   Score: 10000
   ItemPrefabs:

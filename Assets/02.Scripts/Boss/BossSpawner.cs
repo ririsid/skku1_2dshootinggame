@@ -9,6 +9,8 @@ public class BossSpawner : MonoBehaviour
 
     private GameObject _boss;
 
+    private GameObject _player;
+
     public void Spawn()
     {
         StopSpawnEnemies();
@@ -18,9 +20,10 @@ public class BossSpawner : MonoBehaviour
     public void RemoveBoss()
     {
         if (_boss == null) return;
+        UI_Game.Instance.HideBossHealthSlider();
         Destroy(_boss);
         _boss = null;
-        ResumeSpawnEnemies();
+        StartCoroutine(ResumeSpawnEnemiesCoroutine());
     }
 
     private void Awake()
@@ -39,21 +42,37 @@ public class BossSpawner : MonoBehaviour
     private void ShowWarningText()
     {
         UI_Game.Instance.ShowWarningText();
-        // 2초 뒤에 CreateBoss 함수를 코루틴으로 호출한다.
         StartCoroutine(SpawnCoroutine());
     }
 
     IEnumerator SpawnCoroutine()
     {
+        // HoldPlayer();
         yield return new WaitForSeconds(2f); // 2초 대기
         if (_boss != null) yield break;
         CreateBoss();
+        // ResumePlayer();
+    }
+
+    private void HoldPlayer()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        if (_player == null) return;
+        _player.GetComponent<Player>().HoldFire();
+    }
+
+    private void ResumePlayer()
+    {
+        if (_player == null) return;
+        _player.GetComponent<Player>().ResumeFire();
     }
 
     private void CreateBoss()
     {
         _boss = Instantiate(BossPrefabs[0]);
         _boss.transform.position = transform.position;
+        var boss = _boss.GetComponent<Boss>();
+        UI_Game.Instance.SetBossHealthSlider(boss.Health);
     }
 
     private void StopSpawnEnemies()
@@ -65,6 +84,12 @@ public class BossSpawner : MonoBehaviour
         {
             enemySpawner.StopSpawn();
         }
+    }
+
+    private IEnumerator ResumeSpawnEnemiesCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        ResumeSpawnEnemies();
     }
 
     private void ResumeSpawnEnemies()

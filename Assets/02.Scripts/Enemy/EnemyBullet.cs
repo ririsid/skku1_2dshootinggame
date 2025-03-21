@@ -41,17 +41,9 @@ public class EnemyBullet : MonoBehaviour
 
     private GameObject _explosion;
 
-    public void TurnDirection(bool isRight)
-    {
-        if (isRight)
-        {
-            _direction = Vector2.up + Vector2.right;
-        }
-        else
-        {
-            _direction = Vector2.up + Vector2.left;
-        }
-    }
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float rotationAmount = 30f; // 최대 회전 각도
+    private float elapsedTime = 0f;
 
     private void Start()
     {
@@ -86,8 +78,12 @@ public class EnemyBullet : MonoBehaviour
         if (_isMovementStopped) return;
         if (BulletType == EnemyBulletType.BulletType2)
         {
-            // 조금씩 각도를 틀어서 전진하기
-            _direction = Quaternion.Euler(0, 0, _direction.x) * _direction;
+            // 시간 업데이트
+            elapsedTime += Time.deltaTime * rotationSpeed;
+
+            // 사인 함수를 이용한 진동형 회전
+            float angle = Mathf.Sin(elapsedTime) * rotationAmount;
+            _direction = Quaternion.Euler(0, 0, angle) * Vector2.up;
         }
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
@@ -95,7 +91,7 @@ public class EnemyBullet : MonoBehaviour
     private void CheckPosition()
     {
         if (_isMovementStopped) return;
-        float distance = _type4MovementDistance + Random.Range(-0.5f, 0.5f);
+        float distance = _type4MovementDistance + Random.Range(0f, 2f);
         if (Vector3.Distance(_startPosition, transform.position) >= distance)
         {
             _isMovementStopped = true;

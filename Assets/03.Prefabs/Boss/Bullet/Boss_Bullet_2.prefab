@@ -101,8 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7834d235a427dac4097732fab3d3ec24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 6
   BulletType: 1
+  ExplosionVFXPrefab: {fileID: 0}
   Damage: 20
 --- !u!58 &-8185156513937487339
 CircleCollider2D:

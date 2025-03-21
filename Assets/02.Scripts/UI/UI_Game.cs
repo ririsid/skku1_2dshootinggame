@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class UI_Game : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class UI_Game : MonoBehaviour
     // - 경고 텍스트 UI
     public TextMeshProUGUI WarningText;
 
+    // - 보스 체력 슬라이더
+    public Slider BossHealthSlider;
+
     // 기능: 새로고침
     public void Refresh(int boomCount, int killCount)
     {
@@ -50,7 +54,6 @@ public class UI_Game : MonoBehaviour
     {
         // 문자열 포멧
         ScoreText.text = score.ToString("N0");
-        DOTween.KillAll(true);
         ScoreText.rectTransform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f)
             .OnComplete(() =>
         {
@@ -69,6 +72,23 @@ public class UI_Game : MonoBehaviour
             WarningText.rectTransform.DOAnchorPosY(WarningText.rectTransform.anchoredPosition.y + 400, 0.1f)
             .OnComplete(() => WarningText.gameObject.SetActive(false));
         });
+    }
 
+    public void SetBossHealthSlider(int maxHealth)
+    {
+        BossHealthSlider.gameObject.SetActive(true);
+        BossHealthSlider.maxValue = maxHealth;
+        BossHealthSlider.value = 0;
+        BossHealthSlider.DOValue(maxHealth, 2f).SetEase(Ease.OutCubic);
+    }
+
+    public void UpdateBossHealthSlider(int currentHealth)
+    {
+        BossHealthSlider.value = currentHealth;
+    }
+
+    public void HideBossHealthSlider()
+    {
+        BossHealthSlider.gameObject.SetActive(false);
     }
 }

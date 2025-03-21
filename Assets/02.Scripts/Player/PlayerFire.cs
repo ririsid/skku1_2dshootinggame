@@ -21,13 +21,24 @@ public class PlayerFire : PlayerComponent
     // - 쿨타임 / 쿨타이머
     public float Cooltimer = 0f;
 
+    private bool _isHold = false;
 
+    public void HoldFire()
+    {
+        _isHold = true;
+    }
 
+    public void ResumeFire()
+    {
+        _isHold = false;
+    }
 
     // 필요 기능:
     // - 발사하다.
     private void Update()
     {
+        if (_isHold) return;
+
         Cooltimer -= Time.deltaTime;
 
         // 쿨타임이 아직 안됐으면 종료

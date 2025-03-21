@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -36,10 +37,13 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _cameraShake = Camera.main.GetComponent<CameraShake>();
-        Load();
+        // Load();
+        MyData = new PlayerData();
+        MyData.KillCount = 90;
+        MyData.Score = 1000;
         UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
         UI_Game.Instance.RefreshScore(MyData.Score);
-        BossSpawner.Instance.Spawn();
+        // BossSpawner.Instance.Spawn();
     }
 
     private void Save()
@@ -79,11 +83,11 @@ public class Player : MonoBehaviour
         {
             MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
         }
+        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
         if (MyData.KillCount > 0 && MyData.KillCount % BOSS_SPAWN_COUNT == 0)
         {
             BossSpawner.Instance.Spawn();
         }
-        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
 
         Save();
     }
@@ -122,6 +126,18 @@ public class Player : MonoBehaviour
         {
             itemObject.GetComponent<ItemObject>().IsMagnetized = true;
         }
+    }
+
+    public void HoldFire()
+    {
+        var playerFire = GetComponent<PlayerFire>();
+        playerFire.HoldFire();
+    }
+
+    public void ResumeFire()
+    {
+        var playerFire = GetComponent<PlayerFire>();
+        playerFire.ResumeFire();
     }
 
     private void Update()

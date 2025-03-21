@@ -81,8 +81,6 @@ public class Boss : Enemy
 
     void MoveAroundDestination()
     {
-        if (_angryState < BossAngryLevel.Level2) return;
-
         // 보스가 지정된 위치 반경을 계속 돌아다닌다.
         // 랜덤 포지선 근처에 도착하기 전까지는 계속 이동한다.
         if (Vector3.Distance(gameObject.transform.position, _randomPosition) < 0.1f)
@@ -153,8 +151,6 @@ public class Boss : Enemy
         {
             float angle = i * 360f / bulletCount;
             GameObject bullet = Instantiate(BulletPrefabs[1], transform.position, Quaternion.identity);
-            var enemyBullet = bullet.GetComponent<EnemyBullet>();
-            enemyBullet.TurnDirection(_flagFireDirection);
             bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
         _flagFireDirection = !_flagFireDirection;
@@ -189,6 +185,10 @@ public class Boss : Enemy
 
     private void CheckHealth()
     {
+        if (_isLanding)
+        {
+            UI_Game.Instance.UpdateBossHealthSlider(Health);
+        }
         switch (Health)
         {
             case var _ when Health <= _initialHealth * 0.3f:
