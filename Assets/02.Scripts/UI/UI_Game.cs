@@ -35,7 +35,7 @@ public class UI_Game : MonoBehaviour
     public TextMeshProUGUI WarningText;
 
     // - 보스 체력 슬라이더
-    public Slider BossHealthSlider;
+    public GameObject BossHealthBar;
 
     // 기능: 새로고침
     public void Refresh(int boomCount, int killCount)
@@ -76,19 +76,19 @@ public class UI_Game : MonoBehaviour
 
     public void SetBossHealthSlider(int maxHealth)
     {
-        BossHealthSlider.gameObject.SetActive(true);
-        BossHealthSlider.maxValue = maxHealth;
-        BossHealthSlider.value = 0;
-        BossHealthSlider.DOValue(maxHealth, 2f).SetEase(Ease.OutCubic);
+        BossHealthBar.SetActive(true);
+        var healthBar = BossHealthBar.GetComponent<DelayedHealthBar>();
+        healthBar.MaxHealth = maxHealth;
     }
 
     public void UpdateBossHealthSlider(int currentHealth)
     {
-        BossHealthSlider.value = currentHealth;
+        var healthBar = BossHealthBar.GetComponent<DelayedHealthBar>();
+        healthBar.CurrentHealth = currentHealth;
     }
 
     public void HideBossHealthSlider()
     {
-        BossHealthSlider.gameObject.SetActive(false);
+        BossHealthBar.SetActive(false);
     }
 }
