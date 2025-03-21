@@ -34,7 +34,13 @@ public class Boss : Enemy
 
     private float _circleFireCoolTime = 1f;
 
-    private bool _isFiring = false;
+    private float _mineFireCoolTime = 3f;
+
+    private bool _isCircleFiring = false;
+
+    private bool _isMineFiring = false;
+
+    private bool _flagFireDirection = false;
 
     private int _initialHealth;
 
@@ -88,60 +94,97 @@ public class Boss : Enemy
 
     private void Fire()
     {
-        if (!_isLanding || _isFiring) return;
-        StartCoroutine(FireCoroutine());
+        if (!_isLanding) return;
+        if (!_isCircleFiring)
+        {
+            StartCoroutine(CircleFireCoroutine());
+        }
+        if (!_isMineFiring && _angryState == BossAngryLevel.Level3)
+        {
+            StartCoroutine(MineFireCoroutine());
+        }
     }
 
-    private IEnumerator FireCoroutine()
+    private IEnumerator CircleFireCoroutine()
     {
-        _isFiring = true;
+        _isCircleFiring = true;
         switch (_angryState)
         {
             case BossAngryLevel.Level1:
-                FireLevel1();
+                CircleFireLevel1();
                 break;
             case BossAngryLevel.Level2:
-                FireLevel2();
+                CircleFireLevel2();
                 break;
             case BossAngryLevel.Level3:
-                FireLevel3();
+                CircleFireLevel3();
                 break;
         }
         yield return new WaitForSeconds(_circleFireCoolTime);
-        _isFiring = false;
+        _isCircleFiring = false;
     }
 
-    void FireLevel1()
+    private IEnumerator MineFireCoroutine()
     {
-        // 총알을 360도로 균등하게 20개 발사한다.
-        for (int i = 0; i < 20; i++)
+        _isMineFiring = true;
+        GameObject bullet = Instantiate(BulletPrefabs[3], transform.position, Quaternion.identity);
+        bullet.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        yield return new WaitForSeconds(_mineFireCoolTime);
+        _isMineFiring = false;
+    }
+
+    private void CircleFireLevel1()
+    {
+        int bulletCount = 20;
+        // 총알을 360도로 균등하게 발사한다.
+        for (int i = 0; i < bulletCount; i++)
         {
-            float angle = i * 18f;
+            float angle = i * 360f / bulletCount;
             GameObject bullet = Instantiate(BulletPrefabs[0], transform.position, Quaternion.identity);
             bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
 
-    void FireLevel2()
+    private void CircleFireLevel2()
     {
-        // 총알을 360도로 균등하게 15개 발사한다.
-        for (int i = 0; i < 15; i++)
+        int bulletCount = 20;
+        // 총알을 360도로 균등하게 발사한다.
+        for (int i = 0; i < bulletCount; i++)
         {
-            float angle = i * 24f;
+            float angle = i * 360f / bulletCount;
             GameObject bullet = Instantiate(BulletPrefabs[1], transform.position, Quaternion.identity);
+            var enemyBullet = bullet.GetComponent<EnemyBullet>();
+            enemyBullet.TurnDirection(_flagFireDirection);
             bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
+        _flagFireDirection = !_flagFireDirection;
     }
 
-    void FireLevel3()
+    private void CircleFireLevel3()
     {
-        // 총알을 360도로 균등하게 20개 발사한다.
-        for (int i = 0; i < 20; i++)
+        StartCoroutine(FireLevel3Coroutine());
+    }
+
+    private IEnumerator FireLevel3Coroutine()
+    {
+        int bulletCount = 7;
+        float startAngle = 150f;
+        float endAngle = 222f;
+        if (_flagFireDirection)
         {
-            float angle = i * 18f + Time.time * 5f;
+            startAngle = 222f;
+            endAngle = 150f;
+        }
+        _flagFireDirection = !_flagFireDirection;
+        // 총알을 부채꼴로 발사한다.
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float angle = startAngle + (endAngle - startAngle) * i / bulletCount;
             GameObject bullet = Instantiate(BulletPrefabs[2], transform.position, Quaternion.identity);
             bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            yield return new WaitForSeconds(0.1f);
         }
+        yield return new WaitForSeconds(1f);
     }
 
     private void CheckHealth()
@@ -157,6 +200,10 @@ public class Boss : Enemy
             case var _ when Health <= _initialHealth * 0.7f:
                 _isLanding = true;
                 _angryState = BossAngryLevel.Level2;
+                _moveState = BossMoveState.MoveAroundDestination;
+                break;
+            case var _ when Health <= _initialHealth * 0.9f:
+                _isLanding = true;
                 _moveState = BossMoveState.MoveAroundDestination;
                 break;
         }
