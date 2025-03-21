@@ -34,16 +34,21 @@ public class Player : MonoBehaviour
         get => MyData.KillCount % ADD_COUNT;
     }
 
+    private bool _isBossModeForTest = false;
+
     private void Start()
     {
         _cameraShake = Camera.main.GetComponent<CameraShake>();
-        // Load();
-        MyData = new PlayerData();
-        MyData.KillCount = 90;
-        MyData.Score = 1000;
+        if (_isBossModeForTest)
+        {
+            MyData.KillCount = 99;
+        }
+        else
+        {
+            Load();
+        }
         UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
         UI_Game.Instance.RefreshScore(MyData.Score);
-        // BossSpawner.Instance.Spawn();
     }
 
     private void Save()
@@ -83,13 +88,15 @@ public class Player : MonoBehaviour
         {
             MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
         }
+
         UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
+
+        Save();
+
         if (MyData.KillCount > 0 && MyData.KillCount % BOSS_SPAWN_COUNT == 0)
         {
             BossSpawner.Instance.Spawn();
         }
-
-        Save();
     }
 
     public void SubtractBoomCount()

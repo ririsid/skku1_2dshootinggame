@@ -12,13 +12,8 @@ public class DelayedHealthBar : MonoBehaviour
         set
         {
             BackSlider.maxValue = value;
-            BackSlider.value = 0f;
             FrontSlider.maxValue = value;
-            FrontSlider.value = 0f;
-            FrontSlider.DOValue(value, 2f).SetEase(Ease.OutCubic).OnComplete(() =>
-            {
-                BackSlider.value = value;
-            });
+            InitializeHealthBar(value);
         }
     }
 
@@ -26,8 +21,23 @@ public class DelayedHealthBar : MonoBehaviour
     {
         set
         {
-            BackSlider.DOValue(value, 1f).SetEase(Ease.OutCubic);
             FrontSlider.value = value;
+            DelayedSetValues(value);
         }
+    }
+
+    private void InitializeHealthBar(float value)
+    {
+        BackSlider.value = 0f;
+        FrontSlider.value = 0f;
+        FrontSlider.DOValue(value, 2f).SetEase(Ease.OutCubic).OnComplete(() =>
+        {
+            BackSlider.value = value;
+        });
+    }
+
+    private void DelayedSetValues(float value)
+    {
+        BackSlider.DOValue(value, 1f).SetEase(Ease.OutCubic);
     }
 }
