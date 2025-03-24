@@ -10,13 +10,8 @@ public enum EnemyType
 
 public class Enemy : MonoBehaviour
 {
-    [Header("적 타입")]
-    public EnemyType EnemyType;
-    
-    public float Speed = 5f;
+    public EnemyDataSO Data;
     public int Health = 100;
-    public int Damage = 40;
-    public int Score = 0;
     
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
@@ -34,13 +29,13 @@ public class Enemy : MonoBehaviour
     public void Initialize()
     {
         // 초기화 코드가 들어갈 예정이다.
-        Health = 100;
+        Health = Data.MaxHealth;
     }
     
     
     private void Start()
     {
-        switch (EnemyType)
+        switch (Data.EnemyType)
         {
             case EnemyType.Basic:
             {
@@ -81,14 +76,14 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         // 타겟형이 매번 방향을 갱신
-        if (EnemyType == EnemyType.Follow)
+        if (Data.EnemyType == EnemyType.Follow)
         {
             SetDirection();
         }
         
         //transform.Translate(_direction * Speed * Time.deltaTime);
         // Translate 조향이 필요할 때 쓰는게 좋다.
-        transform.position += (Vector3)_direction * Speed * Time.deltaTime;
+        transform.position += (Vector3)_direction * Data.Speed * Time.deltaTime;
     }
 
     public void TakeDamage(Damage damage)
@@ -98,7 +93,7 @@ public class Enemy : MonoBehaviour
         if (Health <= 0)
         {
             OnDeath(damage);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
         else
         {
@@ -117,7 +112,7 @@ public class Enemy : MonoBehaviour
         {
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<PlayerBoom>().AddKillCount();
-            player.GetComponent<Player>().AddScore(Score);
+            player.GetComponent<Player>().AddScore(Data.Score);
         }
         
         // 30% 확률로
@@ -149,10 +144,10 @@ public class Enemy : MonoBehaviour
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
 
             // 묻지말고 시켜라!
-            player.TakeDamage(Damage);
+            player.TakeDamage(Data.Damage);
 
             // 나죽자
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
 
     }
