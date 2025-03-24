@@ -59,4 +59,31 @@ public class BulletPool : MonoBehaviour
             }
         }
     }
+
+    // 1. 응집도를 높혔다.
+    // 2. 은닉화를 했다. (캡슐화)
+    // 3. 객체 생성 로직을 분리했다.
+    // 싱글톤 + 오브젝트 풀링 + 팩토리 메서드
+
+    public Bullet Create(BulletType bulletType, Vector3 position)
+    {
+        foreach (Bullet bullet in Bullets)
+        {
+            // 2. 내가 원하는 타입이고, 비활성화 되어 있다면
+            if (bullet.BulletType == bulletType && bullet.gameObject.activeInHierarchy == false)
+            {
+                bullet.Initialize();
+
+                // 3. 위치를 총구로 옮기고
+                bullet.transform.position = position;
+
+                // 4. 발사한다. (활성화한다.)
+                bullet.gameObject.SetActive(true);
+
+                return bullet;
+            }
+        }
+
+        return null;
+    }
 }

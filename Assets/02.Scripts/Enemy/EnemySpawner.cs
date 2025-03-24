@@ -45,23 +45,21 @@ public class EnemySpawner : MonoBehaviour
             // 3) 호출 횟수가 같아야한다.
 
             // 3. 스폰을 한다.
-            GameObject enemy = null;
+            Enemy enemy = null;
 
             float percentage = Random.Range(0f, 1f);
             if (percentage <= 0.5f) // 50%
             {
-                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Basic]);
+                enemy = EnemyPool.Instance.Create(EnemyType.Basic, transform.position);
             }
             else if (percentage <= 0.8f)
             {
-                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Target]);
+                enemy = EnemyPool.Instance.Create(EnemyType.Target, transform.position);
             }
             else
             {
-                enemy = Instantiate(EnemyPrefabs[(int)EnemyType.Follow]);
+                enemy = EnemyPool.Instance.Create(EnemyType.Follow, transform.position);
             }
-
-            enemy.transform.position = this.transform.position;
 
 
 

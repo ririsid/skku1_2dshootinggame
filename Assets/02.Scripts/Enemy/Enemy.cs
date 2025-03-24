@@ -28,13 +28,16 @@ public class Enemy : MonoBehaviour
     public GameObject[] ItemPrefabs;
     public GameObject ExplosionVFXPrefab;
 
+    private int _health;
+
     public void Initialize()
     {
-        Health = 100;
+        _health = Health;
     }
 
     private void Awake()
     {
+        Initialize();
         _animator = GetComponent<Animator>();
     }
 
@@ -106,12 +109,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(Damage damage)
     {
-        Health -= damage.Value;
+        _health -= damage.Value;
 
-        if (Health <= 0)
+        if (_health <= 0)
         {
             OnDeath(damage);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
         else
         {
@@ -169,7 +172,7 @@ public class Enemy : MonoBehaviour
             player.TakeDamage(Damage);
 
             // 나죽자
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
 
     }
