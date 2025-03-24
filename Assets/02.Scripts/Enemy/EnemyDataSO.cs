@@ -7,6 +7,7 @@ using UnityEngine;
 // ㄴ 공유된 데이터 개념으이므로 이 방식은 '플라이웨이트' 패턴이라고 할 수 있따.
 // 데이터를 모듈화 함으로써 테스트와 관리가 편리해진다.
 
+
 [CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Objects/EnemyDataSO")]
 public class EnemyDataSO : ScriptableObject
 {

@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     // 내 코드가 그렇게 이상한가요?(C#) -> 도메인 주도 설계 철저 입문(C#)
 
     public PlayerData PlayerData;
-    
+
+    public bool SaveInit = false;
     
     public int   Health = 100;
     public float MoveSpeed = 3f;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        
+        
         Load();
         
         UI_Game.Instance.RefreshScore(PlayerData.Score);
@@ -39,6 +42,11 @@ public class Player : MonoBehaviour
 
     private void Load()
     {
+        if (SaveInit)
+        {
+            PlayerPrefs.DeleteKey("PlayerData");
+        }
+        
         // 로드
         string jsonLoadedString = PlayerPrefs.GetString("PlayerData", string.Empty);
         

@@ -11,7 +11,9 @@ public enum EnemyType
 public class Enemy : MonoBehaviour
 {
     public EnemyDataSO Data;
-    public int Health = 100;
+    public int   Health = 100;
+    public float Speed;
+    private int  Damage;
     
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
@@ -25,11 +27,16 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
-    
+
+   
     public void Initialize()
     {
         // 초기화 코드가 들어갈 예정이다.
-        Health = Data.MaxHealth;
+        LevelDataSO levelData = LevelManager.Instance.GetLevelData();
+        
+        Damage = (int)(Data.Damage * levelData.DamgeFactor);
+        Speed  = Data.Speed * levelData.SpeedFactor;
+        Health = (int)(Data.MaxHealth * levelData.HealthFactor);
     }
     
     
@@ -83,7 +90,7 @@ public class Enemy : MonoBehaviour
         
         //transform.Translate(_direction * Speed * Time.deltaTime);
         // Translate 조향이 필요할 때 쓰는게 좋다.
-        transform.position += (Vector3)_direction * Data.Speed * Time.deltaTime;
+        transform.position += (Vector3)_direction * Speed * Time.deltaTime;
     }
 
     public void TakeDamage(Damage damage)
@@ -144,7 +151,7 @@ public class Enemy : MonoBehaviour
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
 
             // 묻지말고 시켜라!
-            player.TakeDamage(Data.Damage);
+            player.TakeDamage(Damage);
 
             // 나죽자
             gameObject.SetActive(false);

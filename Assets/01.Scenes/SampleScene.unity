@@ -373,6 +373,7 @@ MonoBehaviour:
     Score: 0
     KillCount: 0
     BoomCount: 0
+  SaveInit: 1
   Health: 100
   MoveSpeed: 3
   AttackCooltime: 0.6
@@ -2289,6 +2290,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee2491cadd71344ba556a60bb010a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2003251881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003251882}
+  - component: {fileID: 2003251883}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2003251882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003251881}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003251883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003251881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489c5e00a5f4de349981ad59e7803245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelDatas:
+  - {fileID: 11400000, guid: db267241d51b17f45b8a924447f579a4, type: 2}
+  - {fileID: 11400000, guid: 7a7faeda8ae5b95468461aeaaae55c7f, type: 2}
+  - {fileID: 11400000, guid: e57976396b4a0604389ac2c6a2bd8a8a, type: 2}
+  - {fileID: 11400000, guid: c1b045668ce120049a66db7fbcc5e0a8, type: 2}
+  - {fileID: 11400000, guid: 38901f5f105ca7d4c85bfc8879ad7e0b, type: 2}
+  MyPlayer: {fileID: 74543905}
 --- !u!1 &2046237182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,3 +2698,4 @@ SceneRoots:
   - {fileID: 1146587933}
   - {fileID: 1023739414}
   - {fileID: 2139950349}
+  - {fileID: 2003251882}
