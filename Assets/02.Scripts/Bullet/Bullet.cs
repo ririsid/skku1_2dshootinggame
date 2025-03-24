@@ -12,12 +12,7 @@ public class Bullet : MonoBehaviour
     // 목표: 위로 계속 이동하고 싶다.
 
     // 필요 속성
-    // - 이동 속도
-    public float Speed = 5;
-
-    public BulletType BulletType;
-
-    public int Damage;
+    public BulletDataSO Data;
 
     public void Initialize()
     {
@@ -33,7 +28,7 @@ public class Bullet : MonoBehaviour
         Vector2 dir = Vector2.up;
 
         // 2. 이동한다.
-        transform.Translate(dir * Speed * Time.deltaTime);
+        transform.Translate(dir * Data.Speed * Time.deltaTime);
     }
 
 
@@ -49,14 +44,13 @@ public class Bullet : MonoBehaviour
         {
             Damage damage = new Damage
             {
-                Value = Damage,
+                Value = Data.Damage,
                 Type = DamageType.Bullet,
             };
 
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
 
-            // Destroy(this.gameObject);
             gameObject.SetActive(false);
         }
     }

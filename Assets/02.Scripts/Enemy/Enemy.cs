@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
         {
             _player = GameObject.FindGameObjectWithTag("Player");
         }
+        if (_player == null) return;
 
         // 방향을 구한다. (target - me)
         _direction = _player.transform.position - this.transform.position;

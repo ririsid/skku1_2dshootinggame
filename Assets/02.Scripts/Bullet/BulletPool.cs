@@ -70,7 +70,7 @@ public class BulletPool : MonoBehaviour
         foreach (Bullet bullet in Bullets)
         {
             // 2. 내가 원하는 타입이고, 비활성화 되어 있다면
-            if (bullet.BulletType == bulletType && bullet.gameObject.activeInHierarchy == false)
+            if (bullet.Data.BulletType == bulletType && bullet.gameObject.activeInHierarchy == false)
             {
                 bullet.Initialize();
 

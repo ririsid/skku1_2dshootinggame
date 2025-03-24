@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyDataSO_Basic
   m_EditorClassIdentifier: 
   EnemyType: 0
-  Speed: 5
-  MaxHealth: 3
+  Speed: 4
+  MaxHealth: 100
   Damage: 40
   Score: 10
