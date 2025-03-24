@@ -36,11 +36,8 @@ public class EnemyPool : MonoBehaviour
             for (int i = 0; i < PoolSize; i++)
             {
                 Enemy enemy = Instantiate(enemyPrefab);
-
                 Enemies.Add(enemy);
-
                 enemy.transform.SetParent(transform);
-
                 enemy.gameObject.SetActive(false);
             }
         }
@@ -53,11 +50,8 @@ public class EnemyPool : MonoBehaviour
             if (enemy.EnemyType == enemyType && enemy.gameObject.activeInHierarchy == false)
             {
                 enemy.Initialize();
-
                 enemy.transform.position = position;
-
                 enemy.gameObject.SetActive(true);
-
                 return enemy;
             }
         }

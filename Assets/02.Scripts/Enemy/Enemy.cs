@@ -125,8 +125,7 @@ public class Enemy : MonoBehaviour
     private void OnDeath(Damage damage)
     {
         // 폭발 이펙트를 생성
-        GameObject vfx = Instantiate(ExplosionVFXPrefab);
-        vfx.transform.position = this.transform.position;
+        VfxPool.Instance.Create(ExplosionVFXPrefab.name, this.transform.position);
 
         // 플레이어 붐에게 나 죽었음을 알린다.
         if (damage.Type == DamageType.Bullet)

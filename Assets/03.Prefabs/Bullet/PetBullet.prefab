@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 6
-  BulletType: 0
+  BulletType: 2
   Damage: 30
 --- !u!60 &3034303697512211713
 PolygonCollider2D:
