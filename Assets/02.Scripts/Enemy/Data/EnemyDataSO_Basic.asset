@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 0
   Speed: 5
-  MaxHealth: 100
+  MaxHealth: 3
   Damage: 40
   Score: 10

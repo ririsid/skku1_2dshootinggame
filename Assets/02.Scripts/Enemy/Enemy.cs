@@ -15,6 +15,10 @@ public class Enemy : MonoBehaviour
     [Header("적 타입")]
     public EnemyDataSO Data;
 
+    public float Speed;
+    public int MaxHealth;
+    public int Damage;
+
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
 
@@ -27,7 +31,12 @@ public class Enemy : MonoBehaviour
 
     public void Initialize()
     {
-        Health = Data.MaxHealth;
+        LevelDataSO levelData = LevelManager.Instance.GetLevelData();
+        Damage = (int)(Data.Damage * levelData.DamageFactor);
+        MaxHealth = (int)(Data.MaxHealth * levelData.HealthFactor);
+        Speed = Data.Speed * levelData.SpeedFactor;
+
+        Health = MaxHealth;
     }
 
     private void Awake()
@@ -99,7 +108,7 @@ public class Enemy : MonoBehaviour
 
         //transform.Translate(_direction * Speed * Time.deltaTime);
         // Translate 조향이 필요할 때 쓰는게 좋다.
-        transform.position += (Vector3)_direction * Data.Speed * Time.deltaTime;
+        transform.position += (Vector3)_direction * Speed * Time.deltaTime;
     }
 
     public void TakeDamage(Damage damage)
@@ -163,7 +172,7 @@ public class Enemy : MonoBehaviour
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
 
             // 묻지말고 시켜라!
-            player.TakeDamage(Data.Damage);
+            player.TakeDamage(Damage);
 
             // 나죽자
             gameObject.SetActive(false);

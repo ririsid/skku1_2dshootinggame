@@ -1486,6 +1486,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MySpriteRenderer: {fileID: 0}
   ScrollSpeed: 0.2
+--- !u!1 &721476173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721476175}
+  - component: {fileID: 721476174}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721476174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721476173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80acdcede2699c4eaa6cedadf867892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelData:
+  - {fileID: 11400000, guid: fc358ff47d432c541ae616e2b489744f, type: 2}
+  - {fileID: 11400000, guid: 3c688101e4d7e344e82dfd250650264d, type: 2}
+  - {fileID: 11400000, guid: 0d9c5c3c6be942b459b27ee57504e0db, type: 2}
+  - {fileID: 11400000, guid: e146646b6b1acc44db095cb611387c11, type: 2}
+  - {fileID: 11400000, guid: 7a16c21fc27dff447b1e84706e187c64, type: 2}
+  MyPlayer: {fileID: 74543905}
+--- !u!4 &721476175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721476173}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743386786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3474,3 +3525,4 @@ SceneRoots:
   - {fileID: 444614461}
   - {fileID: 1271860564}
   - {fileID: 213970158}
+  - {fileID: 721476175}

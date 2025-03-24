@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fc3a1db779d4b44c94ae3ffb18ca1d7, type: 3}
-  m_Name: EnemyDataSO_Boss
+  m_Script: {fileID: 11500000, guid: 67aaac82717e93945824d9e7df9545a3, type: 3}
+  m_Name: LevelDataSO_10000
   m_EditorClassIdentifier: 
-  EnemyType: 3
-  Speed: 3.6000001
-  MaxHealth: 3
-  Damage: 40
-  Score: 1000
+  Score: 10000
+  DamageFactor: 5
+  HealthFactor: 5
+  SpeedFactor: 1.5

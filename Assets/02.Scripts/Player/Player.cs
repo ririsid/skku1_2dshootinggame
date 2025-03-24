@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     // - 모드(자동, 수동)
     public PlayMode PlayMode = PlayMode.Manual;
 
-    private PlayerData MyData = new PlayerData();
-    public bool HasBoom => MyData.BoomCount > 0;
+    public PlayerData PlayerData = new PlayerData();
+    public bool HasBoom => PlayerData.BoomCount > 0;
 
     private CameraShake _cameraShake;
 
@@ -31,24 +31,31 @@ public class Player : MonoBehaviour
 
     private int _killCountForBoom
     {
-        get => MyData.KillCount % ADD_COUNT;
+        get => PlayerData.KillCount % ADD_COUNT;
     }
+
+    private bool _isReset = true;
 
     private bool _isBossModeForTest = false;
 
     private void Start()
     {
         _cameraShake = Camera.main.GetComponent<CameraShake>();
+        if (_isReset)
+        {
+            SecurePlayerPrefs.DeleteKey("PlayerData");
+
+        }
         if (_isBossModeForTest)
         {
-            MyData.KillCount = 99;
+            PlayerData.KillCount = 99;
         }
         else
         {
             Load();
         }
-        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
-        UI_Game.Instance.RefreshScore(MyData.Score);
+        UI_Game.Instance.Refresh(PlayerData.BoomCount, PlayerData.KillCount);
+        UI_Game.Instance.RefreshScore(PlayerData.Score);
     }
 
     private void Save()
@@ -58,7 +65,7 @@ public class Player : MonoBehaviour
 
         // 각각 쌍으로 저장(Set), 불러오기(Get)함수가 있다.
 
-        string data = JsonUtility.ToJson(MyData);
+        string data = JsonUtility.ToJson(PlayerData);
         SecurePlayerPrefs.SetString("PlayerData", data);
     }
 
@@ -67,33 +74,33 @@ public class Player : MonoBehaviour
         string jsonString = SecurePlayerPrefs.GetString("PlayerData");
         if (string.IsNullOrEmpty(jsonString) == false)
         {
-            MyData = JsonUtility.FromJson<PlayerData>(jsonString);
+            PlayerData = JsonUtility.FromJson<PlayerData>(jsonString);
         }
     }
 
     public void AddScore(int score)
     {
-        MyData.Score += score;
+        PlayerData.Score += score;
 
-        UI_Game.Instance.RefreshScore(MyData.Score);
+        UI_Game.Instance.RefreshScore(PlayerData.Score);
 
         Save();
     }
 
     public void AddKillCount()
     {
-        MyData.KillCount++;
+        PlayerData.KillCount++;
 
-        if (MyData.KillCount > 0 && _killCountForBoom == 0)
+        if (PlayerData.KillCount > 0 && _killCountForBoom == 0)
         {
-            MyData.BoomCount = Mathf.Min(MyData.BoomCount + 1, MAX_COUNT);
+            PlayerData.BoomCount = Mathf.Min(PlayerData.BoomCount + 1, MAX_COUNT);
         }
 
-        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
+        UI_Game.Instance.Refresh(PlayerData.BoomCount, PlayerData.KillCount);
 
         Save();
 
-        if (MyData.KillCount > 0 && MyData.KillCount % BOSS_SPAWN_COUNT == 0)
+        if (PlayerData.KillCount > 0 && PlayerData.KillCount % BOSS_SPAWN_COUNT == 0)
         {
             BossSpawner.Instance.Spawn();
         }
@@ -101,9 +108,9 @@ public class Player : MonoBehaviour
 
     public void SubtractBoomCount()
     {
-        MyData.BoomCount -= 1;
+        PlayerData.BoomCount -= 1;
 
-        UI_Game.Instance.Refresh(MyData.BoomCount, MyData.KillCount);
+        UI_Game.Instance.Refresh(PlayerData.BoomCount, PlayerData.KillCount);
 
         Save();
     }
