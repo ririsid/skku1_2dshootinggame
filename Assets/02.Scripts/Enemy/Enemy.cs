@@ -31,6 +31,12 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
     
+    public void Initialize()
+    {
+        // 초기화 코드가 들어갈 예정이다.
+        Health = 100;
+    }
+    
     
     private void Start()
     {

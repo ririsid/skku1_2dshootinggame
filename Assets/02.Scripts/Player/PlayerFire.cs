@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayMode
@@ -11,9 +12,6 @@ public class PlayerFire : PlayerComponent
     // 목표: 총알을 만들어서 발사하고 싶다.
     
     // 필요 속성:
-    // - 총알 프리팹
-    public GameObject BulletPrefab;
-    public GameObject SubBulletPrefab;
     
     // - 총구들
     public GameObject[] Muzzles;
@@ -43,16 +41,56 @@ public class PlayerFire : PlayerComponent
         {
             foreach (GameObject muzzle in Muzzles)
             {
-                GameObject bullet = Instantiate(BulletPrefab); // 인스턴스화
+                // 기존: 새로 생성
+                // GameObject bullet = Instantiate(BulletPrefab); // 인스턴스화
+                
+                // 개선: 풀 이용
+                // 총알 풀에 있는 총알들 중에서
+                // 비활성화 되어 있는 총알을 
+                // 발사 시킨다. (활성화 시킨다.)
+                
+                // 1. 미리 생성되어 있는 총알 풀을 쫙~ 조회하면서
+                List<Bullet> pool = BulletPool.Instance.Bullets;
+                foreach (Bullet bullet in pool)
+                {
+                    // 2. 내가 원하는 타입이고, 비활성화 되어 있다면
+                    if (bullet.BulletType == BulletType.Main && bullet.gameObject.activeInHierarchy == false)
+                    {
+                        // 3. 위치를 총구로 옮기고
+                        bullet.transform.position = muzzle.transform.position;
+                        
+                        bullet.Initialize();
+                        
+                        // 4. 발사한다. (활성화 한다.)
+                        bullet.gameObject.SetActive(true);
 
-                bullet.transform.position = muzzle.transform.position;
+                        break;
+                    }
+                }
+                
+                
             }
 
             foreach (GameObject subMuzzle in SubMuzzles)
             {
-                GameObject subBullet = Instantiate(SubBulletPrefab); // 인스턴스화
+                // 1. 미리 생성되어 있는 총알 풀을 쫙~ 조회하면서
+                List<Bullet> pool = BulletPool.Instance.Bullets;
+                foreach (Bullet bullet in pool)
+                {
+                    // 2. 내가 원하는 타입이고, 비활성화 되어 있다면
+                    if (bullet.BulletType == BulletType.Sub && bullet.gameObject.activeInHierarchy == false)
+                    {
+                        // 3. 위치를 총구로 옮기고
+                        bullet.transform.position = subMuzzle.transform.position;
+                        
+                        bullet.Initialize();
 
-                subBullet.transform.position = subMuzzle.transform.position;
+                        // 4. 발사한다. (활성화 한다.)
+                        bullet.gameObject.SetActive(true);
+
+                        break;
+                    }
+                }
             }
 
             Cooltimer = _player.AttackCooltime;

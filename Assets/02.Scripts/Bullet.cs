@@ -18,6 +18,12 @@ public class Bullet : MonoBehaviour
 
     public int Damage;
 
+    public void Initialize()
+    {
+        // 초기화 코드가 들어갈 예정이다.
+        // Health = 100;
+    }
+
     private void Start()
     {
         // 총알 타입에 따라 대미지를 다르게한다.
@@ -66,7 +72,8 @@ public class Bullet : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
 
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
