@@ -20,7 +20,7 @@ public class BulletPool : MonoBehaviour
     public int PoolSize = 20;
   
     // - 총알을 관리할 풀 리스트
-    public List<Bullet> Bullets;
+    private List<Bullet> _bullets;
 
     // 싱글톤
     public static BulletPool Instance;
@@ -34,7 +34,7 @@ public class BulletPool : MonoBehaviour
         
         // 2. 총알 풀을 총알을 담을 수 있는 크기로 만든다.
         int bulletPrefabCount = BulletPrefabs.Count;
-        Bullets = new List<Bullet>(PoolSize * bulletPrefabCount);
+        _bullets = new List<Bullet>(PoolSize * bulletPrefabCount);
         
         // 3. 프리팹 갯수만큼 반복해서
         foreach (Bullet bulletPrefab in BulletPrefabs)
@@ -45,7 +45,7 @@ public class BulletPool : MonoBehaviour
                 Bullet bullet = Instantiate(bulletPrefab);
                 
                 // 5. 생성할 총알을 풀에 추가한다.
-                Bullets.Add(bullet);
+                _bullets.Add(bullet);
                 
                 // 총알을 BulletPool 폴더에 집어넣는다.
                 // (하위 구조)
@@ -56,6 +56,32 @@ public class BulletPool : MonoBehaviour
             }
         }
         
+    }
+
+
+    // 1. 응집도를 높혔다.
+    // 2. 은닉화를 했다. (캡슐화)
+    // 3. 객체 생성 로직을 분리했다. 
+    // 싱글톤 + 오브젝트 풀링 + 팩토리 메서드 
+    
+    
+    public Bullet Create(BulletType bulletType, Vector3 position)
+    {
+        foreach (Bullet bullet in _bullets)
+        {
+            if (bullet.BulletType == bulletType && bullet.gameObject.activeInHierarchy == false)
+            {
+                bullet.transform.position = position;
+                        
+                bullet.Initialize();
+                        
+                bullet.gameObject.SetActive(true);
+
+                return bullet;
+            }
+        }
+
+        return null;
     }
     
 }
