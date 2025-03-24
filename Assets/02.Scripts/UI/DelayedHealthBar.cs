@@ -7,6 +7,9 @@ public class DelayedHealthBar : MonoBehaviour
     public Slider BackSlider;
     public Slider FrontSlider;
 
+    private float _throttleTime = 2f;
+    private float _lastUpdate;
+
     public float MaxHealth
     {
         set
@@ -38,6 +41,10 @@ public class DelayedHealthBar : MonoBehaviour
 
     private void DelayedSetValues(float value)
     {
-        BackSlider.DOValue(value, 1f).SetEase(Ease.OutCubic);
+        if (Time.time - _lastUpdate > _throttleTime)
+        {
+            BackSlider.DOValue(value, 1f).SetEase(Ease.OutCubic);
+            _lastUpdate = Time.time;
+        }
     }
 }

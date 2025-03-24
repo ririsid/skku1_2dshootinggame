@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
     private bool _isReset = true;
 
-    private bool _isBossModeForTest = false;
+    private bool _isBossModeForTest = true;
 
     private void Start()
     {
