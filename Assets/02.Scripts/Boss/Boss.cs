@@ -46,7 +46,7 @@ public class Boss : Enemy
 
     private void Start()
     {
-        _initialHealth = Health;
+        _initialHealth = Data.MaxHealth;
     }
 
     private void Update()
@@ -72,7 +72,7 @@ public class Boss : Enemy
     void MoveToDestination()
     {
         // 보스가 있으면 보스의 위치를 지정된 위치로 이동시킨다.
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, LandingPosition, Speed * Time.deltaTime);
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, LandingPosition, Data.Speed * Time.deltaTime);
         if (gameObject.transform.position == LandingPosition)
         {
             _isLanding = true;
@@ -87,7 +87,7 @@ public class Boss : Enemy
         {
             _randomPosition = LandingPosition + Random.insideUnitSphere * _movementRadius;
         }
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _randomPosition, Speed * Time.deltaTime);
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _randomPosition, Data.Speed * Time.deltaTime);
     }
 
     private void Fire()

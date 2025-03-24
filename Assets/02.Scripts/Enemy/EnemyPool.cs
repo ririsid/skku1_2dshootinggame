@@ -47,7 +47,7 @@ public class EnemyPool : MonoBehaviour
     {
         foreach (Enemy enemy in Enemies)
         {
-            if (enemy.EnemyType == enemyType && enemy.gameObject.activeInHierarchy == false)
+            if (enemy.Data.EnemyType == enemyType && enemy.gameObject.activeInHierarchy == false)
             {
                 enemy.Initialize();
                 enemy.transform.position = position;

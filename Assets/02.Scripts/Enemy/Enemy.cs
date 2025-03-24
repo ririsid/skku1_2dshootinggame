@@ -13,12 +13,7 @@ public enum EnemyType
 public class Enemy : MonoBehaviour
 {
     [Header("적 타입")]
-    public EnemyType EnemyType;
-
-    public float Speed = 5f;
-    public int Health = 100;
-    public int Damage = 40;
-    public int Score = 10;
+    public EnemyDataSO Data;
 
     private GameObject _player = null; // 저 널널해요.
     private Vector2 _direction;
@@ -28,11 +23,11 @@ public class Enemy : MonoBehaviour
     public GameObject[] ItemPrefabs;
     public GameObject ExplosionVFXPrefab;
 
-    private int _health;
+    public int Health;
 
     public void Initialize()
     {
-        _health = Health;
+        Health = Data.MaxHealth;
     }
 
     private void Awake()
@@ -44,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        switch (EnemyType)
+        switch (Data.EnemyType)
         {
             case EnemyType.Basic:
                 {
@@ -97,21 +92,21 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         // 타겟형이 매번 방향을 갱신
-        if (EnemyType == EnemyType.Follow)
+        if (Data.EnemyType == EnemyType.Follow)
         {
             SetDirection();
         }
 
         //transform.Translate(_direction * Speed * Time.deltaTime);
         // Translate 조향이 필요할 때 쓰는게 좋다.
-        transform.position += (Vector3)_direction * Speed * Time.deltaTime;
+        transform.position += (Vector3)_direction * Data.Speed * Time.deltaTime;
     }
 
     public void TakeDamage(Damage damage)
     {
-        _health -= damage.Value;
+        Health -= damage.Value;
 
-        if (_health <= 0)
+        if (Health <= 0)
         {
             OnDeath(damage);
             gameObject.SetActive(false);
@@ -132,8 +127,8 @@ public class Enemy : MonoBehaviour
         {
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<Player>().AddKillCount();
-            player.GetComponent<Player>().AddScore(Score);
-            if (EnemyType == EnemyType.Boss)
+            player.GetComponent<Player>().AddScore(Data.Score);
+            if (Data.EnemyType == EnemyType.Boss)
             {
                 BossSpawner.Instance.RemoveBoss();
             }
@@ -168,7 +163,7 @@ public class Enemy : MonoBehaviour
             Player player = other.GetComponent<Player>(); // 게임 오브젝트의 컴포넌트를 가져온다.
 
             // 묻지말고 시켜라!
-            player.TakeDamage(Damage);
+            player.TakeDamage(Data.Damage);
 
             // 나죽자
             gameObject.SetActive(false);

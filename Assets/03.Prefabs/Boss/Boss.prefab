@@ -303,17 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfaac1489d3784743ae462f05101c5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 3
-  Speed: 1.5
-  Health: 8000
-  Damage: 100
-  Score: 10000
+  Data: {fileID: 11400000, guid: 2eab05a4a0821d0428dd106beb766180, type: 2}
   ItemPrefabs:
   - {fileID: 9120490128172919261, guid: feb9c676ca5e01247ab0146ddf113423, type: 3}
   - {fileID: 185569316825520367, guid: 7275a97d060e83748a27b1c19a3d9a50, type: 3}
   - {fileID: 1558162560451030827, guid: 0251e7ac5ae9b3b4c913a64f2806105b, type: 3}
   - {fileID: 1558162560451030827, guid: f5801a5af06a7c0479b18237032aea31, type: 3}
   ExplosionVFXPrefab: {fileID: 4281803884475410557, guid: 43cfa511c758c144fad0d995bb34e6de, type: 3}
+  Health: 8000
   LandingPosition: {x: 0, y: 2, z: 0}
   BulletPrefabs:
   - {fileID: 2561961521261136921, guid: 9809a1e06d141b248bb08f53c20d61ee, type: 3}

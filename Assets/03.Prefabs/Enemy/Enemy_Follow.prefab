@@ -105,17 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d464d235658546640925e60f2effc0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 2
-  Speed: 3.5
-  Health: 100
-  Damage: 40
-  Score: 40
+  Data: {fileID: 11400000, guid: 5ea797cd7f99c8f48b833e31919bd87e, type: 2}
   ItemPrefabs:
   - {fileID: 9120490128172919261, guid: feb9c676ca5e01247ab0146ddf113423, type: 3}
   - {fileID: 185569316825520367, guid: 7275a97d060e83748a27b1c19a3d9a50, type: 3}
   - {fileID: 1558162560451030827, guid: 0251e7ac5ae9b3b4c913a64f2806105b, type: 3}
   - {fileID: 1558162560451030827, guid: f5801a5af06a7c0479b18237032aea31, type: 3}
   ExplosionVFXPrefab: {fileID: 2053940262934968344, guid: dac8d9a9e2458b94c92c5f56fa83a24c, type: 3}
+  Health: 100
 --- !u!60 &3992936361890954934
 PolygonCollider2D:
   m_ObjectHideFlags: 0
