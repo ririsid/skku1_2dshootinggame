@@ -19,6 +19,11 @@ public class Bullet : MonoBehaviour
 
     public int Damage;
 
+    public void Initialize()
+    {
+
+    }
+
     // 기능
     // - 계속 위로 이동
     private void Move()
@@ -51,7 +56,8 @@ public class Bullet : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
 
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

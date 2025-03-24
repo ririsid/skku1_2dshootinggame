@@ -28,6 +28,11 @@ public class Enemy : MonoBehaviour
     public GameObject[] ItemPrefabs;
     public GameObject ExplosionVFXPrefab;
 
+    public void Initialize()
+    {
+        Health = 100;
+    }
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
