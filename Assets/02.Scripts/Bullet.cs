@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
         {
             Damage damage = new Damage
             {
-                Value = Damage,
+                Value = Damage + (int)StatManager.Instance.Stats[(int)StatType.Damage].Value,
                 Type = DamageType.Bullet,
             };
             

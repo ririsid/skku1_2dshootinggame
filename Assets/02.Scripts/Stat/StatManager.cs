@@ -23,10 +23,6 @@ public class StatManager : MonoBehaviour
         {
             _stats.Add(new Stat((StatType)i, 1, StatDataList[i]));
         }
-        
-        _stats.Add(new Stat(StatType.Damage, 1, StatDataList[0]));
-        _stats.Add(new Stat(StatType.Health, 1, StatDataList[1]));
-        _stats.Add(new Stat(StatType.MoveSpeed, 1, StatDataList[2]));
     }
 
     public bool TryLevelUp(StatType statType)

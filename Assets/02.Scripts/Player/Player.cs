@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public bool SaveInit = false;
     
     public int   Health = 100;
-    public float MoveSpeed = 3f;
+    public float MoveSpeed => StatManager.Instance.Stats[(int)StatType.MoveSpeed].Value;
     public float AttackCooltime  = 0.6f;
 
     public float Defence = 0.2f;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        
+        Health = (int)StatManager.Instance.Stats[(int)StatType.Health].Value;
         
         Load();
         
