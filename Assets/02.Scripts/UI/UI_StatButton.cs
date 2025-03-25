@@ -15,6 +15,15 @@ public class UI_StatButton : MonoBehaviour
         NameTextUI.text  = _stat.StatType.ToString();
         ValueTextUI.text = $"{_stat.Value}";
         CostTextUI.text = $"{_stat.Cost:N0}";
+
+        if (CurrencyManager.Instance.Have(CurrencyType.Gold, _stat.Cost))
+        {
+            CostTextUI.color = Color.black;
+        }
+        else
+        {
+            CostTextUI.color = Color.red;
+        }
     }
 
     public void OnClickLevelUp()

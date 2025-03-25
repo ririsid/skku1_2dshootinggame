@@ -15,8 +15,12 @@ public class StatManager : MonoBehaviour
     private List<Stat> _stats = new List<Stat>();
     public List<Stat> Stats => _stats;
 
+    // 델리게이트: 함수를 참조하는 변수
+    public delegate void OnDataChanged();
+// 
+    public OnDataChanged OnDataChangedCallback = null;
     
-    public List<UI_StatButton> UI_StatButtons;
+
     
     private void Awake()
     {
@@ -26,27 +30,13 @@ public class StatManager : MonoBehaviour
         {
             _stats.Add(new Stat((StatType)i, 1, StatDataList[i]));
         }
-        
-        for (int i = 0; i < (int)StatType.Count; ++i)
-        {
-            UI_StatButtons[i]._stat = _stats[i];
-        }
     }
-
-    private void Start()
-    {
-        for (int i = 0; i < (int)StatType.Count; ++i)
-        {
-            UI_StatButtons[i].Refresh();
-        }
-    }
+    
 
     public bool TryLevelUp(StatType statType)
     {
-        for (int i = 0; i < (int)StatType.Count; ++i)
-        {
-            UI_StatButtons[i].Refresh();
-        }
+        // 야! 데이터가 변화할때마다 너가 등록한 함수를 호출해줄게!
+        OnDataChangedCallback?.Invoke();
         
         return _stats[(int)statType].TryUpgrade();
     }
