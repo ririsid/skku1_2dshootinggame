@@ -1815,11 +1815,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 819845203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 32, y: 200}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -24}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &975747098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,8 +3864,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2003251882}
   - component: {fileID: 2003251883}
+  - component: {fileID: 2003251884}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3905,6 +3906,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1b045668ce120049a66db7fbcc5e0a8, type: 2}
   - {fileID: 11400000, guid: 38901f5f105ca7d4c85bfc8879ad7e0b, type: 2}
   MyPlayer: {fileID: 74543905}
+--- !u!114 &2003251884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003251881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a932c1c1afdf374aafaf6b4133c88ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2041722936
 GameObject:
   m_ObjectHideFlags: 0

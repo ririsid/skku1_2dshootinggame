@@ -120,6 +120,15 @@ public class Enemy : MonoBehaviour
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<PlayerBoom>().AddKillCount();
             player.GetComponent<Player>().AddScore(Data.Score);
+            
+            if (UnityEngine.Random.Range(0, 5) == 0)
+            {
+                CurrencyManager.Instance.Add(CurrencyType.Diamond, 10);
+            }
+            else
+            {
+                CurrencyManager.Instance.Add(CurrencyType.Gold, Data.Score);
+            }
         }
         
         // 30% 확률로

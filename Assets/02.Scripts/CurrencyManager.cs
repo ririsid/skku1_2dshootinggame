@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,13 +10,21 @@ public enum CurrencyType
     Count    
 }
 
+public class CurrencySaveData
+{
+    public List<int> Values = new List<int>(new int[(int)CurrencyType.Count]);
+    
+    // ToDo: 저장 시간 추가
+}
+
 // 재화 관리자
 public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance;
 
-    private List<int> _values = new List<int>(new int[(int)CurrencyType.Count]);
-    
+    private CurrencySaveData _saveData;
+    private List<int> _values => _saveData.Values;
+
     private void Awake()
     {
         Instance = this;
@@ -36,6 +45,8 @@ public class CurrencyManager : MonoBehaviour
     public void Add(CurrencyType currencyType, int amount)
     {
         _values[(int)currencyType] += amount;
+        
+        Debug.Log($"Gold: {Gold} Diamond: {Diamond}");
         
         Save();
     }
@@ -65,7 +76,7 @@ public class CurrencyManager : MonoBehaviour
     
     private void Save()
     {
-        string jsonData = JsonUtility.ToJson(_values);
+        string jsonData = JsonUtility.ToJson(_saveData);
         PlayerPrefs.SetString(SAVE_KEY, jsonData);
     }
 
@@ -74,7 +85,11 @@ public class CurrencyManager : MonoBehaviour
         if (PlayerPrefs.HasKey(SAVE_KEY))
         {
             string jsonData = PlayerPrefs.GetString(SAVE_KEY);
-            _values = JsonUtility.FromJson<List<int>>(jsonData);
+            _saveData = JsonUtility.FromJson<CurrencySaveData>(jsonData);
+        }
+        else
+        {
+            _saveData = new CurrencySaveData();
         }
     }
 }
