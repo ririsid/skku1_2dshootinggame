@@ -39,6 +39,12 @@ public static class SecurePlayerPrefs
         return string.IsNullOrEmpty(encryptedValue) ? defaultValue : DecryptString(encryptedValue);
     }
 
+    public static bool HasKey(string key)
+    {
+        string encryptedKey = EncryptKey(key); // 해시 기반 키 암호화
+        return PlayerPrefs.HasKey(encryptedKey); // 암호화된 키가 존재하는지 확인
+    }
+
     // PlayerPrefs에 저장된 값을 삭제
     public static void DeleteKey(string key)
     {

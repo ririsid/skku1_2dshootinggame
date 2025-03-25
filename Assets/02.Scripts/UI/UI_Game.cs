@@ -31,11 +31,16 @@ public class UI_Game : MonoBehaviour
     // - 점수 UI
     public TextMeshProUGUI ScoreText;
 
+    // - 골드 UI
+    public TextMeshProUGUI GoldText;
+
     // - 경고 텍스트 UI
     public TextMeshProUGUI WarningText;
 
     // - 보스 체력 슬라이더
     public GameObject BossHealthBar;
+
+    public List<GameObject> UpgradeButtons;
 
     // 기능: 새로고침
     public void Refresh(int boomCount, int killCount)
@@ -60,6 +65,12 @@ public class UI_Game : MonoBehaviour
             // 람다식
             ScoreText.rectTransform.localScale = Vector3.one;
         });
+    }
+
+    public void RefreshGold(int gold)
+    {
+        GoldText.text = gold.ToString("N0");
+
     }
 
     public void ShowWarningText()

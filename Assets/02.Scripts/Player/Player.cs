@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         }
         UI_Game.Instance.Refresh(PlayerData.BoomCount, PlayerData.KillCount);
         UI_Game.Instance.RefreshScore(PlayerData.Score);
+        UI_Game.Instance.RefreshGold(CurrencyManager.Instance.Get(CurrencyType.Gold));
     }
 
     private void Save()
@@ -83,6 +84,8 @@ public class Player : MonoBehaviour
         PlayerData.Score += score;
 
         UI_Game.Instance.RefreshScore(PlayerData.Score);
+        CurrencyManager.Instance.Add(CurrencyType.Gold, score);
+        UI_Game.Instance.RefreshGold(CurrencyManager.Instance.Get(CurrencyType.Gold));
 
         Save();
     }

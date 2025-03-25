@@ -58,6 +58,7 @@ public class ItemObject : MonoBehaviour
 
     private void Update()
     {
+        if (_player == null) return;
         float distance = Vector2.Distance(transform.position, _player.transform.position); // 3 
         if (distance < 3f)
         {
