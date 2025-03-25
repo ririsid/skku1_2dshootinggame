@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
 
     public int Health = 100;
-    public float MoveSpeed = 3f;
+    public float MoveSpeed => StatManager.Instance.Stats[(int)StatType.MoveSpeed].Value;
     public float AttackCooltime = 0.6f;
 
     public float Defense = 0.2f;
@@ -34,17 +34,17 @@ public class Player : MonoBehaviour
         get => PlayerData.KillCount % ADD_COUNT;
     }
 
-    private bool _isReset = true;
+    private bool _isReset = false;
 
-    private bool _isBossModeForTest = true;
+    private bool _isBossModeForTest = false;
 
     private void Start()
     {
         _cameraShake = Camera.main.GetComponent<CameraShake>();
+        Health = (int)StatManager.Instance.Stats[(int)StatType.Health].Value;
         if (_isReset)
         {
             SecurePlayerPrefs.DeleteKey("PlayerData");
-
         }
         if (_isBossModeForTest)
         {

@@ -20,6 +20,9 @@ public class CurrencyManager : MonoBehaviour
 
     public static CurrencyManager Instance = null;
 
+    public delegate void OnDataChanged();
+    public OnDataChanged OnDataChangedCallback = null;
+
     private CurrencySaveData _saveData;
 
     private List<int> _values => _saveData.Values;
@@ -71,6 +74,7 @@ public class CurrencyManager : MonoBehaviour
         {
             _saveData = new CurrencySaveData();
         }
+        OnDataChangedCallback?.Invoke();
         string jsonData = JsonUtility.ToJson(_saveData);
         SecurePlayerPrefs.SetString(SAVE_KEY, jsonData);
     }

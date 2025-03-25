@@ -152,7 +152,7 @@ public class ItemObject : MonoBehaviour
 
                 case ItemType.MoveSpeedUp:
                     {
-                        player.MoveSpeed += Value;
+                        // player.MoveSpeed += Value;
                         break;
                     }
 

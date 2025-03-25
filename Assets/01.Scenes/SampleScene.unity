@@ -372,7 +372,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
-  MoveSpeed: 3
   AttackCooltime: 0.6
   Defense: 0.2
   PlayMode: 1
@@ -742,6 +741,7 @@ GameObject:
   - component: {fileID: 226830808}
   - component: {fileID: 226830807}
   - component: {fileID: 226830806}
+  - component: {fileID: 226830809}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -795,6 +795,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &226830809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226830805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46906a591b63fed4ca1065889e5c3dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatDataList:
+  - {fileID: 11400000, guid: 911c29f4302b1174d84a39d7343e2511, type: 2}
+  - {fileID: 11400000, guid: 9a5742600893b4c4888c36dc388ef669, type: 2}
+  - {fileID: 11400000, guid: f4c5f689e1acd564497fed7551e6326d, type: 2}
 --- !u!1 &283777664
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,9 +955,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 835671947}
     m_Modifications:
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1884318961725164961, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Name
-      value: UI_UpgradeButton
+      value: UI_StatButton
       objectReference: {fileID: 0}
     - target: {fileID: 2495451615467842515, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: Cost
@@ -954,6 +982,58 @@ PrefabInstance:
     - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_text
       value: Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 343840003}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLevelUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_StatButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Pivot.x
@@ -981,7 +1061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1050,6 +1130,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1884318961725164961, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
   m_PrefabInstance: {fileID: 343840000}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &343840003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2495451615467842515, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+  m_PrefabInstance: {fileID: 343840000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343840002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4243c2dda90c2a340802b7b6daa78167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &444614459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,8 +1851,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835671947}
+  - component: {fileID: 835671948}
   m_Layer: 5
-  m_Name: UI_Upgrade
+  m_Name: UI_Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1789,6 +1881,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &835671948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835671946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec3bf4d6baa224cb6f0cdf54239165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_StatButtons:
+  - {fileID: 343840003}
+  - {fileID: 1097663017190339638}
+  - {fileID: 8206132185248849602}
 --- !u!4 &878979959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7028784574583575662, guid: a92ebdf897fa283428c50a41fe4411a5, type: 3}
@@ -3618,7 +3726,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1884318961725164961, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Name
-      value: UI_UpgradeButton
+      value: UI_StatButton
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Pivot.x
@@ -3705,6 +3813,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+--- !u!114 &1097663017190339638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2495451615467842515, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+  m_PrefabInstance: {fileID: 1097663017190339637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937534095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4243c2dda90c2a340802b7b6daa78167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2473081645919853038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3932,15 +4051,79 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 835671947}
     m_Modifications:
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808955697655296580, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1884318961725164961, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Name
-      value: UI_UpgradeButton
+      value: UI_StatButton
       objectReference: {fileID: 0}
     - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_text
       value: 'MoveSpeed
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555221193668802717, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8206132185248849602}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLevelUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_StatButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065685786887610082, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433397900589165649, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_Pivot.x
@@ -3968,7 +4151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7436898225410882631, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4037,6 +4220,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1884318961725164961, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
   m_PrefabInstance: {fileID: 8206132185248849599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8206132185248849602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2495451615467842515, guid: d06df1e346491924eb4ac350eeb24d5c, type: 3}
+  m_PrefabInstance: {fileID: 8206132185248849599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206132185248849601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4243c2dda90c2a340802b7b6daa78167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

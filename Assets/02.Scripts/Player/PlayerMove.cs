@@ -169,11 +169,11 @@ public class PlayerMove : PlayerComponent
         if (Input.GetKeyDown(KeyCode.Q))
         {
             // 매직넘버로 해도 되는 숫자: -1, 0, 1
-            _player.MoveSpeed += Math.Min(10, _player.MoveSpeed + 1);
+            // _player.MoveSpeed += Math.Min(10, _player.MoveSpeed + 1);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            _player.MoveSpeed = Math.Max(1, _player.MoveSpeed - 1);
+            // _player.MoveSpeed = Math.Max(1, _player.MoveSpeed - 1);
         }
     }
 
