@@ -8,8 +8,37 @@ public enum EnemyType
 }
 
 
+
+
 public class Enemy : MonoBehaviour
 {
+    private void Test()
+    {
+       MoneyManager.Instance.Add(MoneyType.Diamond, 1000);
+
+
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public EnemyDataSO Data;
     public int   Health = 100;
     public float Speed;
