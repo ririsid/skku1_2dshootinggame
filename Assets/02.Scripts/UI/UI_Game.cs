@@ -45,6 +45,8 @@ public class UI_Game : MonoBehaviour
     public TextMeshProUGUI KillText;
 
     public TextMeshProUGUI ScoreText;
+   
+    public TextMeshProUGUI GoldText;
 
 
     // 스마트 UI -> UI는 말 그대로 사용자와 게임간의 인터랙티브한 요소를 보여주는 책임만 가져야지
@@ -80,5 +82,10 @@ public class UI_Game : MonoBehaviour
         // 애니메이션
         // 딜레이와 +보간 주는 로직
         // dotween 사용
+    }
+
+    public void RefreshGold(int gold)
+    {
+        GoldText.text = gold.ToString("N0");
     }
 }

@@ -32,6 +32,11 @@ public class CurrencyManager : MonoBehaviour
         Load();
     }
 
+    private void Start()
+    {
+        UI_Game.Instance.RefreshGold(Gold);
+    }
+
     public int Gold    => _values[(int)CurrencyType.Gold];
     public int Diamond => _values[(int)CurrencyType.Diamond];
     
@@ -46,8 +51,8 @@ public class CurrencyManager : MonoBehaviour
     {
         _values[(int)currencyType] += amount;
         
-        Debug.Log($"Gold: {Gold} Diamond: {Diamond}");
-        
+        UI_Game.Instance.RefreshGold(Gold);
+
         Save();
     }
 
@@ -66,6 +71,8 @@ public class CurrencyManager : MonoBehaviour
         }
         
         _values[(int)currencyType] -= amount;
+
+        UI_Game.Instance.RefreshGold(Gold);
 
         Save();
         

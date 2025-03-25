@@ -1401,6 +1401,7 @@ MonoBehaviour:
   - {fileID: 1306624844}
   KillText: {fileID: 1253571584}
   ScoreText: {fileID: 1453278279}
+  GoldText: {fileID: 975747098}
 --- !u!1 &834606040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,7 +1796,7 @@ GameObject:
   - component: {fileID: 975747099}
   - component: {fileID: 975747098}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
