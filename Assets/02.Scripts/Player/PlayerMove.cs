@@ -16,6 +16,8 @@ public class PlayerMove : PlayerComponent
 
     public Animator MyAnimator;
 
+    public DynamicJoystick Joystick;
+
     public PlayerMove()
     {
         UNDER_LINE = 4;
@@ -29,6 +31,10 @@ public class PlayerMove : PlayerComponent
     {
         base.Awake();
         MyAnimator = GetComponent<Animator>();
+
+#if !UNITY_ANDROID
+        Destroy(Joystick.gameObject);
+#endif
     }
 
     private void Update()
@@ -135,6 +141,11 @@ public class PlayerMove : PlayerComponent
     {
         float h = Input.GetAxisRaw("Horizontal"); // 수평 키 : -1, 0, 1
         float v = Input.GetAxisRaw("Vertical");  // 수직 키: -1, 0, 1
+
+#if UNITY_ANDROID
+        h = Joystick.Horizontal;
+        v = Joystick.Vertical;
+#endif
 
         Vector2 direction = new Vector2(h, v);
         direction = direction.normalized;

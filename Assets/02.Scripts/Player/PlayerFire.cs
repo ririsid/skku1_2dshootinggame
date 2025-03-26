@@ -46,7 +46,7 @@ public class PlayerFire : PlayerComponent
 
         List<Bullet> pool = BulletPool.Instance.Bullets;
         // 자동 모드 이거나 "Fire1" 버튼이 입력되면..
-        if (_player.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
+        // if (_player.PlayMode == PlayMode.Auto || Input.GetButtonDown("Fire1"))
         {
             foreach (GameObject muzzle in Muzzles)
             {
