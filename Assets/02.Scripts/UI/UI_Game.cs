@@ -52,7 +52,7 @@ public class UI_Game : MonoBehaviour
         }
 
         // 킬 횟수 텍스트 새로고침
-        KillText.text = $"Kills: {killCount}";
+        KillText.text = killCount.ToString("N0");
     }
 
     public void RefreshScore(int score)
