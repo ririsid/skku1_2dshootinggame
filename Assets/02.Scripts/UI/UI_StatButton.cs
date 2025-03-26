@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class UI_StatButton : MonoBehaviour
     // public TextMeshProUGUI ValueTextUI;
     public TextMeshProUGUI CostTextUI;
     public Image IconImageUI;
-
+    public GameObject VFXPrefab;
 
     public void Refresh()
     {
@@ -23,11 +24,13 @@ public class UI_StatButton : MonoBehaviour
         {
             CostTextUI.color = Color.white;
             IconImageUI.color = Color.white;
+            GetComponent<UIEffect>().edgeMode = EdgeMode.Shiny;
         }
         else
         {
             CostTextUI.color = Color.black;
             IconImageUI.color = Color.black;
+            GetComponent<UIEffect>().edgeMode = EdgeMode.None;
         }
     }
 
@@ -38,6 +41,7 @@ public class UI_StatButton : MonoBehaviour
             Debug.Log($"{_stat.StatType} 레벨업!");
             // 업그레이드 성공 이펙트 실행
             transform.DOScale(1.2f, 0.1f).OnComplete(() => transform.DOScale(1f, 0.1f));
+            Instantiate(VFXPrefab, transform.position, Quaternion.identity);
         }
         else
         {
